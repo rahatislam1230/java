@@ -85,4 +85,16 @@ public class test {
 
     }
 }
+package com.ok.java.datatypes;
+
+public class test {
+    public static void main(String[] args) {
+        int i=0;
+        while(i<5){
+            System.out.println(i);
+            i++;
+        }
+
+    }
+}
 
