@@ -202,3 +202,28 @@ class Test {
         sc.close();
     }
 }
+import java.util.Scanner;
+
+class Test {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[][] n = new int[3][3];
+
+        System.out.println("Enter matrix elements (3x3):");
+        for (int i = 0; i < n.length; ++i) {
+            for (int j = 0; j < n[i].length; ++j) {
+                n[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.println("You entered:");
+        for (int i = 0; i < n.length; ++i) {
+            for (int j = 0; j < n[i].length; ++j) {
+                System.out.print(n[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        sc.close();
+    }
+}
