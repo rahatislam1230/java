@@ -110,3 +110,13 @@ public class test {
 
     }
 }
+package com.ok.java.datatypes;
+
+public class test {
+    public static void main(String[] args) {
+        int [] numbers ={1,2,3,4,5};
+        for(int num :numbers){
+            System.out.println(num);
+        }
+    }
+}
