@@ -16,3 +16,14 @@ public class test {
         System.out.println(c+d);
     }
 }
+package com.ok.java.datatypes;
+
+public class test {
+    public static void main(String[] args) {
+       int a=1;
+       for (int i=0;i<5;++i){
+           System.out.print((a + i) + "\n");
+       }
+
+    }
+}
