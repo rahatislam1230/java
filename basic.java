@@ -27,3 +27,17 @@ public class test {
 
     }
 }
+package com.ok.java.datatypes;
+
+public class test {
+    public static void main(String[] args) {
+       int sum=0;
+       for (int i=0;i<10;++i){
+           int a=1+i;
+           System.out.println(a);
+           sum+=a;
+       }
+       System.out.println("sum"+sum);
+
+    }
+}
