@@ -227,3 +227,24 @@ class Test {
         sc.close();
     }
 }
+class Dog {
+ 
+    String name;
+    int age;
+    
+    public Dog(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public void bark() {
+        System.out.println(name + " is barking!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+ 
+        Dog myDog = new Dog("Buddy", 3);
+        myDog.bark(); 
+    }
+}
