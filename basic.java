@@ -41,3 +41,18 @@ public class test {
 
     }
 }
+package com.ok.java.datatypes;
+
+public class test {
+    public static void main(String[] args) {
+       for (int i=0;i<20;++i){
+        if(i%2==0){
+            System.out.println(i+"even");
+        }else{
+            System.out.println(i+"odd");
+        }
+       }
+
+
+    }
+}
