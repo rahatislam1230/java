@@ -336,3 +336,30 @@ public class test {
         }
     }
 }
+package com.ok.java.datatypes;
+
+import java.util.function.IntBinaryOperator;
+
+public class test {
+    public static void main(String[] args) {
+        int day =3;
+        String dayName;
+        if (day==1){
+            dayName="mon";
+        } else if (day==2) {
+            dayName="wednes";
+        }else if (day==3) {
+            dayName="thus";
+        }else if (day==4) {
+            dayName="fri";
+        }else if (day==5) {
+            dayName="sat";
+        }else if (day==6) {
+            dayName="sunday";
+        }
+        else{
+            dayName="invalid";
+        }
+
+        }
+    }
