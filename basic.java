@@ -388,3 +388,20 @@ public class test {
 
     }
     }
+package com.ok.java.datatypes;
+
+import java.util.function.IntBinaryOperator;
+
+public class test {
+    public static void main(String[] args) {
+               int i=0;
+               while(i<=100){
+                   System.out.println("HEllo");
+                   i++;
+               }
+               for(int j=0;j<=100;++j){
+                   System.out.println("HEllo");
+               }
+
+    }
+    }
