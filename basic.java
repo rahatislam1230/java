@@ -417,3 +417,23 @@ public class test {
 
     }
     }
+
+package com.ok.java.datatypes;
+
+import java.util.function.IntBinaryOperator;
+
+public class test {
+    public static void main(String[] args) {
+              int[]a= new int[5];
+              a[4]=55;
+              System.out.println(a);
+              for(int i=0;i<5;++i){
+                  System.out.println(a[i]);
+              }
+              for(int i:a){
+                  System.out.println(a[i]);
+              }
+
+
+    }
+    }
