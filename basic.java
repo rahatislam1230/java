@@ -461,3 +461,36 @@ public class Car {
         System.out.println("driving");
     }
 }
+package com.ok.java.datatypes;
+
+import java.util.function.IntBinaryOperator;
+
+public class test {
+    public static void main(String[] args) {
+              Car car = new Car("green");
+              car.setSpeed(12);
+
+
+
+    }
+    }
+package com.ok.java.datatypes;
+
+
+public class Car {
+    private int speed ;
+    private String color;
+    public Car(String color){
+        this.color=color;
+    }
+    public int setSpeed(int speed){
+        if(speed<0){
+            System.out.println("not possbile");
+        }else{
+            this.speed=speed;
+            System.out.println("driving");
+        }
+
+        return speed;
+    }
+}
