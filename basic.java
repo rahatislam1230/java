@@ -280,3 +280,13 @@ public class test {
 
     }
 }
+package com.ok.java.datatypes;
+
+public class test {
+    public static void main(String[] args) {
+        int z=1;
+        System.out.println(z++ + --z);
+
+
+    }
+}
