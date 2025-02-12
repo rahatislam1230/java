@@ -290,3 +290,15 @@ public class test {
 
     }
 }
+package com.ok.java.datatypes;
+
+import java.util.function.IntBinaryOperator;
+
+public class test {
+    public static void main(String[] args) {
+        int a= 2;
+        System.out.println(Integer.toBinaryString(a));
+
+
+    }
+}
