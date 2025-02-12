@@ -561,3 +561,61 @@ class Dog extends Amimal{
         System.out.println("woff");
     }
 }
+package com.ok.java.datatypes;
+
+public class test {
+    public static void main(String[] args) {
+        Dog dog= new Dog();
+        dog.sayBye();
+        dog.sleep();
+
+    }
+}
+abstract class Amimal{
+    String color;
+    boolean hasSuperPowers;
+    public Amimal(){
+        hasSuperPowers=false;
+    }
+    abstract  void sayHEllo();
+    abstract  void  sayBye();
+    void sleep(){
+        System.out.println("zzzz");
+    }
+}
+class Dog extends Amimal{
+
+    @Override
+    void sayHEllo() {
+        System.out.println("woff");
+    }
+
+    @Override
+    void sleep() {
+        super.sleep();
+    }
+
+    @Override
+    void sayBye() {
+        System.out.println("woff");
+    }
+}
+interface Mobile{
+    int numberofbatteries = 1;
+    void makeCall();
+}
+interface Mobileplayer{
+    void playMusic();
+}
+class Smartphone implements Mobile,Mobileplayer{
+
+    @Override
+    public void makeCall() {
+        System.out.println("calling ");
+    }
+
+    @Override
+    public void playMusic() {
+        System.out.println("music paying ");
+    }
+}
