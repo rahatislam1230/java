@@ -262,3 +262,21 @@ public class test {
 
     }
 }
+package com.ok.java.datatypes;
+
+public class test {
+    public static void main(String[] args) {
+        int a= 1;
+        String str1 = "hello";
+        String str2 = "hello";
+        System.out.println(str1=str2);
+        System.out.println(str1.equals(str2));
+        str1=str1.toUpperCase();
+        str1=str1.toLowerCase();
+        System.out.println(str1);
+        System.out.println(str1);
+
+
+
+    }
+}
