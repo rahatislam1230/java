@@ -302,3 +302,19 @@ public class test {
 
     }
 }
+package com.ok.java.datatypes;
+
+import java.util.function.IntBinaryOperator;
+
+public class test {
+    public static void main(String[] args) {
+        boolean isSunny = true;
+        boolean isWarm = true;
+        if(isSunny && isWarm){
+            System.out.println("beach day");
+        }else {
+            System.out.println("no");
+
+        }
+    }
+}
