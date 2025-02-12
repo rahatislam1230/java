@@ -527,3 +527,37 @@ class Smartphone extends Camera{
 
 
 }
+package com.ok.java.datatypes;
+
+public class test {
+    public static void main(String[] args) {
+        Dog dog= new Dog();
+        dog.sayBye();
+        dog.sleep();
+
+    }
+}
+abstract class Amimal{
+    abstract  void sayHEllo();
+    abstract  void  sayBye();
+    void sleep(){
+        System.out.println("zzzz");
+    }
+}
+class Dog extends Amimal{
+
+    @Override
+    void sayHEllo() {
+        System.out.println("woff");
+    }
+
+    @Override
+    void sleep() {
+        super.sleep();
+    }
+
+    @Override
+    void sayBye() {
+        System.out.println("woff");
+    }
+}
