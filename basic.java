@@ -363,3 +363,28 @@ public class test {
 
         }
     }
+package com.ok.java.datatypes;
+
+import java.util.function.IntBinaryOperator;
+
+public class test {
+    public static void main(String[] args) {
+                int day =3;
+                String dayName;
+                switch (day){
+                    case 1:
+                        dayName="mon";
+                        break;
+                    case 2:
+                        dayName="tues";
+                        break;
+                    case 3:
+                        dayName="wed";
+                        break;
+                    default:
+                        dayName="inavlid";
+                }
+                System.out.println(dayName);
+
+    }
+    }
