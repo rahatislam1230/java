@@ -437,3 +437,27 @@ public class test {
 
     }
     }
+package com.ok.java.datatypes;
+
+import java.util.function.IntBinaryOperator;
+
+public class test {
+    public static void main(String[] args) {
+              Car car = new Car();
+              car.speed=100;
+              car.color="green";
+              car.drive();
+
+
+    }
+    }
+package com.ok.java.datatypes;
+
+
+public class Car {
+    int speed ;
+    String color;
+    void drive(){
+        System.out.println("driving");
+    }
+}
