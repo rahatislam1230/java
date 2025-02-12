@@ -494,3 +494,36 @@ public class Car {
         return speed;
     }
 }
+package com.ok.java.datatypes;
+
+public class test {
+    public static void main(String[] args) {
+        Smartphone smartphone= new Smartphone();
+        smartphone.capture();
+
+
+
+    }
+    }
+class Camera{
+  void capture(){
+      System.out.println("photo clicking");
+  }
+
+}
+class Musicplay{
+    {
+        System.out.println("music");
+    }
+
+}
+class Phone {
+    void calling(String number){
+        System.out.println("calling" + number);
+    }
+
+}
+class Smartphone extends Camera{
+
+
+}
