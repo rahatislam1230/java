@@ -58,4 +58,24 @@ public static  int calculateProduct(int a,int b){
 
     }    
 
+import java.util.Scanner;
+
+   // public  static  int calculateSum(int a,int b){
+       // return a+b;
+   // }
+public static  int Fact(int n){
+    if(n>0){
+        return n*Fact(n-1);
+    }else{
+        return 1;
+    }
+}
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int a= sc.nextInt();
+        int b=sc.nextInt();
+        System.out.println(Fact(a));
+
+    }    
+
 
