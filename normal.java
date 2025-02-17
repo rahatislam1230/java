@@ -77,5 +77,19 @@ public static  int Fact(int n){
         System.out.println(Fact(a));
 
     }    
+import java.util.Scanner;
+public class Array {
 
+    public static void main(String[] args) {
+        int[] marks= new int [3];
+        Scanner sc= new Scanner(System.in);
+        System.out.println("marks");
+        int mark =sc.nextInt();
+
+        for(int i=0;i<3;i++){
+            System.out.println(marks[i]);
+        }
+    }
+
+}
 
