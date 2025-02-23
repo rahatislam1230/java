@@ -47,3 +47,16 @@ public class Strings{
     }
 
 }
+import java.util.Scanner;
+public class Strings{
+
+
+    public static void main(String[] args) {
+       // concatenation
+        String firstName="tony";
+        String lastName ="stark";
+        String fullName= firstName+ " "+lastName;
+        System.out.println(fullName.length());//legth of the funtion
+    }
+
+}
