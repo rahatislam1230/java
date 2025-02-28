@@ -81,3 +81,21 @@ class Solution {
         return s.toLowerCase();
     }
 }    
+///other
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+       Scanner sc = new Scanner(System.in);
+       String s=sc.nextLine();
+       sc.close();
+        Solution solution = new Solution();
+        System.out.println(solution.toLowerCase(s));
+
+    }
+}
+class Solution {
+    public String toLowerCase(String s) {
+        return s.toLowerCase();
+    }
+}
