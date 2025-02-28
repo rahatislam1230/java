@@ -109,3 +109,18 @@ class Solution {
         return i;
     }
 }    
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+   //     int i =0;
+     //   while(arr[i]<arr[i+1]){
+      //      i++;
+      //  }
+        //return i;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]>arr[i+1]){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
