@@ -110,3 +110,26 @@ public class Array {
     }
 
 }
+import java.lang.*;
+class Start {
+    public static void main(String[] args) {
+        int n = 30;  
+        boolean is_Prime = true;
+        if (n <= 1) {
+            is_Prime = false;
+        } else {
+            for (int i = 2; i * i <= n; i++) {
+                if (n % i == 0) {
+                    is_Prime = false;
+                    break;
+                }
+            }
+        }
+
+        if (is_Prime) {
+            System.out.println(n + " is a prime number");
+        } else {
+            System.out.println(n + " is not a prime number");
+        }
+    }
+}
