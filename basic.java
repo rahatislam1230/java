@@ -739,3 +739,30 @@ class Start{
 	 }
 }
 ```
+import java.lang.*;
+import java.util.Scanner;
+class Start{
+     public static void main(String[] args){
+		 Scanner sc = new Scanner(System.in);
+		 String name[]=new String[3];
+		 double cpga[]= new double[3];
+		 int roll[]=new int[3];
+		 name[0]="rahat";name[1]="rahati";name[2]="kajib";
+		 cpga[0]=3.9;cpga[1]=2.9;cpga[2]=1.9;
+		 roll[0]=24;roll[1]=11;roll[2]=13;
+		 for(int i=0;i<3;++i){
+			 name[i]=sc.nextLine();
+			 cpga[i]=sc.nextDouble();
+			 roll[i]=sc.nextInt();
+			 sc.nextLine();
+			 
+		 }
+		 
+		 for(int i=0;i<3;++i){
+			 System.out.println(name[i]);
+			 System.out.println(cpga[i]);
+			 System.out.println(roll[i]);
+			 
+		 }
+	 }
+}
