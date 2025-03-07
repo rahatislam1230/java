@@ -59,3 +59,27 @@ class Funtion{
 
 	}
 }
+import java.util.*;
+import java.lang.*;
+class Funtion{
+	 public static void main(String[] args) {
+	 Scanner sc = new Scanner(System.in);
+	 System.out.println("Enter the number");
+	 int n=sc.nextInt();
+	 
+	 int fib;
+	 
+	 if(n<0){
+	 	System.out.println("enter postive");
+	 }else{
+	 	int sum=1;
+	 	for(int i=1;i<=n;i++){
+	 		sum*=i;
+	 	}
+	 	 System.out.println(sum);
+	 
+	}
+	
+	 sc.close();
+	}
+}
