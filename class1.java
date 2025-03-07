@@ -47,3 +47,15 @@ class Funtion{
 
 	}
 }
+import java.util.*;
+import java.lang.*;
+class Funtion{
+	 public static void main(String[] args) {
+	 Scanner sc = new Scanner(System.in);
+	 System.out.println("Enter the number");
+	 int N=sc.nextInt();
+	 int sum=N*(N+1)/2;
+	 System.out.println(sum);
+
+	}
+}
