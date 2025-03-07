@@ -83,3 +83,68 @@ class Funtion{
 	 sc.close();
 	}
 }
+import java.util.*;
+import java.lang.*;
+class Function {
+    static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt();
+
+        if (isPrime(n)) {
+            System.out.println(n + " is a Prime Number.");
+        } else {
+            System.out.println(n + " is NOT a Prime Number.");
+        }
+
+        sc.close();
+    }
+}
+import java.util.*;
+import java.lang.*;
+class Function { 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n= sc.nextInt();
+        for(int i=1;i<=n;i++){
+              for(int j=1;j<=i;j++){
+                System.out.print("*");
+              }
+              System.out.println();
+        }
+        sc.close();
+    }
+}
+import java.util.*;
+import java.lang.*;
+class Function { 
+    static boolean ispal(int n){
+        int ori=n,rev=0;
+        while(n>0){
+            int digit=n%10;
+            rev=rev*10+digit;
+            n/=10;
+        }
+        return ori== rev;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n= sc.nextInt();
+        if(ispal(n)){
+            System.out.println("is pal");
+
+        }else{
+            System.out.println("not is pal");
+        }
+    }
+}
+
+
