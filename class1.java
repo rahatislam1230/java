@@ -147,4 +147,88 @@ class Function {
     }
 }
 
+import java.util.*;
+
+class Student {
+    private String name;
+    private int id;
+
+    // Constructor
+    public Student(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    // Getter method for ID
+    public int GetId() {
+        return id;
+    }
+
+    // Getter method for Name
+    public String GetName() {
+        return name;
+    }
+
+    // Setter method for ID
+    public void SetId(int id) {
+        this.id = id;
+    }
+
+    // Setter method for Name
+    public void SetName(String name) {
+        this.name = name;
+    }
+
+    // Method to display student info
+    public void Info() {
+        System.out.println("ID: " + id + " NAME: " + name);
+    }
+}
+
+class StudentMain {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input student name
+        System.out.println("Enter name:");
+        String name = sc.nextLine();
+
+        // Input student ID
+        System.out.println("Enter the ID:");
+        int id = sc.nextInt();
+        sc.nextLine(); // Consume the newline character
+
+        // Create student object
+        Student s = new Student(name, id);
+
+        // Display initial student info
+        System.out.println("Student details:");
+        s.Info();
+
+        // Ask if the user wants to update the details
+        System.out.println("Do you want to update? (yes/no)");
+        String choice = sc.nextLine();
+
+        if (choice.equalsIgnoreCase("yes")) {
+            // Input updated name
+            System.out.println("Enter new name:");
+            String Newname = sc.nextLine();
+
+            // Input updated ID
+            System.out.println("Enter new ID:");
+            int newId = sc.nextInt();
+
+            // Update student details
+            s.SetId(newId);
+            s.SetName(Newname);
+
+            // Display updated info
+            System.out.println("Updated information:");
+            s.Info();
+        }
+
+        // Close scanner
+        sc.close();
+    }
+}
 
