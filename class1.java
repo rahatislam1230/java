@@ -231,4 +231,26 @@ class StudentMain {
         sc.close();
     }
 }
+import java.lang.*;
+class Human{
+    String name;
+    int age;
+    String Check(){
+        if(age>0 && age<=18){
+            return "young";
+        }else if(age>=19 && age<=60){
+            return "adult";
+        }else{
+            return "old";
+        }
+    }
+}
+class Main{
+    public static void main(String[] args){
+        Human h1=new Human();
+        h1.name="rahat";
+        h1.age=20;
+        System.out.println(h1.Check());
+    }
+}
 
