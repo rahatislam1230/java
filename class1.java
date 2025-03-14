@@ -334,3 +334,33 @@ class Start{
     b1.checkBalance();
 }
 }
+import java.lang.*;
+class Student{
+    String name;
+    int age;
+    double[] grades=new double[4];
+    double Calcute(){
+        double sum=0;
+        for(int i=0;i<4;i++){
+          sum+=grades[i];
+        }
+        return sum/4;
+
+    }
+}
+class Start{
+    public static void main(String[] args){
+        Student [] s= new Student[4];
+        for(int i=0;i<3;i++){
+            s[i]=new Student();
+            s[i].name="rahat";
+            s[i].age=20;
+            for(int j=0;j<4;j++){
+                s[i].grades[j]=60;
+            }
+            System.out.println(s[i].Calcute());
+        }
+
+
+    }
+}
