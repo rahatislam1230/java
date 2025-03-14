@@ -253,4 +253,84 @@ class Main{
         System.out.println(h1.Check());
     }
 }
+import java.lang.*;
+class Book{
+    String title;
+    String author;
+    double price;
+    String Check(){
+        if(price>1000){
+            return "Expensive Book";
+        }else{
+            return"Affordable Book";
+        }
+    }
+}
+class Start{
+    public static void main(String[] args){
+        Book b1=new Book();
+        b1.title="jakson";
+        b1.author="author";
+        b1.price=500;
+        System.out.println(b1.Check());
+    }
+}
+import java.lang.*;
+class Vehicle{
+    String modelName;
+    double speed;
+    String Check(){
+        if(speed>120){
+            return "over speeding";
+        }else{
+            return"Normal speed";
+        }
+    }
+}
+class Start{
+    public static void main(String[] args){
+    Vehicle v1 =new Vehicle();
+    v1.modelName = "bmw";
+    v1.speed = 115;
+    System.out.println(v1.Check());
+}
+}
+import java.lang.*;
+class BankAccount{
+    int account_number;
+    String account_holder_name;
+    double balance;
+    public void deposite(double amoubt){
+        if(amoubt>0){
+            balance+=amoubt;
+            System.out.println(amoubt);
+        }else{
+            System.out.println("invalid");
+        }
+    }
+    public void withdraw(double amoubt){
+        if(amoubt>0 && amoubt<=balance){
+            balance-=amoubt;
+            System.out.println(amoubt);
+        }else if(amoubt>balance){
+            System.out.println("tor taka nai");
+        }else{
+            System.out.println("invalid");
+        }
+    }
+    public void checkBalance(){
+        System.out.println(balance);
+    }
 
+}
+class Start{
+    public static void main(String[]args){
+    BankAccount b1=new BankAccount();
+    b1.account_number=120;
+    b1.account_holder_name="rahat";
+    b1.balance=12000000;
+    b1.deposite(1000000);
+    b1.withdraw(1000000000);
+    b1.checkBalance();
+}
+}
