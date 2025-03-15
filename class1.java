@@ -364,3 +364,23 @@ class Start{
 
     }
 }
+import java.lang.*;
+class Vehicle{
+    String make;
+    String mode;
+    int year;
+    Vehicle(String make,String mode,int year){
+        this.make=make;
+        this.mode=mode;
+        this.year=year;
+    }
+    void Details(){
+        System.out.println("make:"+ make +"mode:"+ mode +"year:"+ year);
+    }
+}
+class Start{
+    public static void main(String[] args){
+    Vehicle v1= new Vehicle("japan","toyta",2000);
+    v1.Details();
+}
+}
