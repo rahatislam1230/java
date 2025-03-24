@@ -384,3 +384,178 @@ class Start{
     v1.Details();
 }
 }
+class Person {
+    private int id;
+    private String name;
+    private int age;
+    void setId(int i){
+        id=i;
+    }
+    void setName(String n){
+        name=n;
+    }
+    void setAge(int a){
+        age=a;
+    }
+    int getId(){
+        return id;
+    }
+    String getName(){
+        return name;
+    }
+    int getAge(){
+        return age;
+    }
+    void show() {
+        System.out.println("id = " + id + " " + "name = " + name + " " + "age = " + age);
+    }
+}
+public class Start {
+    public static void main(String[] args) {
+        Person ps[] = new Person[3];
+        for (int i = 0; i < ps.length; i++) {
+            ps[i] = new Person();
+        }
+        ps[0].setId(2054);
+        ps[0].setAge(20);
+        ps[0].setName("Rahat");
+        ps[1].setId(2055);
+        ps[1].setAge(22);
+        ps[1].setName("Sami");
+        ps[2].setId(2056);
+        ps[2].setAge(25);
+        ps[2].setName("Arif");
+        for (int i = 0; i < ps.length; i++) {
+                System.out.println(ps[i].getName() + " " + ps[i].getAge()+" "+ps[i].getId());
+            }
+        }
+}
+public class Main {
+	public static void main(String[] args) {
+		Person p1 = new Person();
+		p1.setId(90);
+		p1.setName("Something");
+		System.out.println(p1.getId());
+		System.out.println(p1.getName());
+	}
+}
+ 
+class Person {
+	private int id;
+	private String name;
+ 
+	public void setId(int i) {
+		id = i;
+	}
+ 
+	public void setName(String n) {
+		name = n;
+	}
+ 
+	public int getId() {
+		return id;
+	}
+ 
+	public String getName() {
+		return name;
+	}
+}
+public class ArrayExample {
+	public static void main(String[] args) {
+		Person persons[] = new Person[3];
+ 
+		Person p1 = new Person(1, "xyz", 50);
+		persons[0] = p1;
+ 
+		// p1.show();
+		// persons[0].show()
+ 
+		persons[1] = new Person(2, "abc", 35);
+ 
+		for (int i = 0; i < persons.length; i++) {
+			if (persons[i] == null) {
+				System.out.println(persons[i]);
+			}
+			else {
+				persons[i].show();
+			}
+		}	
+	}
+}
+ 
+class Person {
+	int id;
+	String name;
+	int age;
+ 
+	Person() { System.out.println("Default Constructor of Person"); }
+ 
+	Person(int i, String n, int a) {
+		System.out.println("Parameterized Constructor of Person");
+		id = i;
+		name = n;
+		age = a;
+	}
+ 
+	void show() {
+		System.out.println("id = " + id + " " + "name = " + name + " " + "age = " + age);
+	}
+}
+import java.util.Scanner;
+ 
+public class StringExample {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int a = sc.nextInt();	
+		sc.nextLine();
+		String b = sc.nextLine();
+		Person p1 = new Person(a, b);
+		p1.show();
+	}
+}
+ 
+class Person {
+	int id;
+	String name;
+ 
+	Person(int i, String n) {
+		id = i;
+		name = n;
+	}
+ 
+	void show() {
+		System.out.println("Id = " + id + " " + "Name = " + name);
+	}
+}
+public class StringExample {
+	public static void main(String[] args) {
+ 
+		String s1 = "Hello";
+		String s2 = "Hallo";
+		String s3 = new String("Hello");
+ 
+		int len = s1.length();
+		System.out.println("length of s1 = " + len);
+ 
+		char ch = s1.charAt(2);
+		System.out.println("Char At 0 position in s1 = " + ch);
+ 
+		int pos = s1.indexOf("l");
+		System.out.println("Position of e in s1 = " + pos);
+ 
+		boolean isEqual = s1.equals(s2);
+		System.out.println("s1.equals(s2) = " + isEqual);
+ 
+		String s4 = s1.substring(1, 4); // ell
+		System.out.println("s1.substring(1, 4) = " + s4);
+ 
+		boolean isEmpty = s1.isEmpty();
+		System.out.println("s1.isEmpty() = " + isEmpty);
+ 
+		String s5 = s1.concat(s4);
+		System.out.println("s1.concat(s4) = " + s5);
+ 
+		int compare = s1.compareTo(s2); // s1 = Hello, s2 = Hallo
+		System.out.println("s1.compareTo(s2) = " + compare);
+	}
+}
