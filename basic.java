@@ -1047,3 +1047,105 @@ class Main{
 
     }
 }
+import java.util.Scanner;
+
+class BankAccount {
+    private String accountHolderName;
+    private double balance;
+    private static final double WITHDRAWAL_LIMIT = 10000; // Set withdrawal limit
+
+    // Constructor to initialize account
+    public BankAccount(String name, double initialBalance) {
+        accountHolderName = name;
+        balance = initialBalance;
+    }
+
+    // Deposit method
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: " + amount);
+        } else {
+            System.out.println("Invalid deposit amount!");
+        }
+    }
+
+    // Withdraw method with limit check
+    public void withdraw(double amount) {
+        if (amount <= 0) {
+            System.out.println("Invalid withdrawal amount!");
+        } else if (amount > balance) {
+            System.out.println("Insufficient balance!");
+        } else if (amount > WITHDRAWAL_LIMIT) {
+            System.out.println("Withdrawal exceeds limit of " + WITHDRAWAL_LIMIT);
+        } else {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount);
+        }
+    }
+
+    // Check current balance
+    public void checkBalance() {
+        System.out.println("Current Balance: " + balance);
+    }
+
+    // Update balance (just for internal adjustments)
+    public void updateBalance(double newBalance) {
+        balance = newBalance;
+        System.out.println("Balance updated. New balance is: " + balance);
+    }
+}
+
+public class BankingSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Create a bank account for the user
+        System.out.print("Enter account holder's name: ");
+        String name = sc.nextLine();
+        BankAccount account = new BankAccount(name, 1000); // Initial balance of 1000
+
+        // Banking menu
+        while (true) {
+            System.out.println("\n--- Banking Menu ---");
+            System.out.println("1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Check Balance");
+            System.out.println("4. Update Balance");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option (1-5): ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:  // Deposit
+                    System.out.print("Enter amount to deposit: ");
+                    double depositAmount = sc.nextDouble();
+                    account.deposit(depositAmount);
+                    break;
+
+                case 2:  // Withdraw
+                    System.out.print("Enter amount to withdraw: ");
+                    double withdrawAmount = sc.nextDouble();
+                    account.withdraw(withdrawAmount);
+                    break;
+
+                case 3:  // Check Balance
+                    account.checkBalance();
+                    break;
+
+                case 4:  // Update Balance
+                    System.out.print("Enter new balance: ");
+                    double newBalance = sc.nextDouble();
+                    account.updateBalance(newBalance);
+                    break;
+
+                case 5:  // Exit
+                    System.out.println("Thank you for using the banking system. Goodbye!");
+                    return;
+
+                default:
+                    System.out.println("Invalid choice! Please choose a valid option.");
+            }
+        }
+    }
+}
