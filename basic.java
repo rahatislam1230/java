@@ -791,3 +791,106 @@ public static void main(String[]args){
     System.out.println("Total objects created: " + Counter.count);
 
 }}
+class Empolyee{
+    private int id;
+    private String name;
+    static {
+        String commpanyName="AIUB";
+        System.out.println(commpanyName);
+    }
+    Empolyee(){
+        System.out.println("default const has been called");
+    }
+    void setId(int i){
+        id =i;
+    }
+     int getId(){
+        return id;
+    }
+    void setName(String n){
+        name =n;
+    }
+    void showDisplay(){
+        System.out.println("name"+name+"id"+id);
+    }
+}
+class Main{
+    public static void main(String[] args){
+        Empolyee e = new Empolyee();
+        e.setId(10);
+        e.setName("rahat");
+        e.showDisplay();
+
+    }
+}
+class Empolyee{
+    private int empID;
+    private String empName;
+    private double salary;
+    void setID(int id){
+        empID=id;
+    }
+    void setName(String name){
+        empName=name;
+    }
+    void setSalary(double salar){
+        salary= salar;
+    }
+    int getId(){
+        return empID;
+    }
+    String getName(){
+        return empName;
+    }
+    double getSalay(){
+        return salary;
+    }
+    void show(){
+        System.out.println(empID+empName+salary);
+    }
+
+}
+class Main{
+    public static void main(String[] args){
+        Empolyee e1 = new Empolyee();
+        Empolyee e2 = new Empolyee();
+        e1.setID(11);
+        e1.setName("rahat");
+        e1.setSalary(10000);
+        e2.setID(12);
+        e2.setName("r");
+        e2.setSalary(102000);
+        e1.show();
+        e2.show();
+
+
+    }
+}
+class Animal{
+    private String type;
+    private String sound;
+    void setType(String t){
+        type=t;
+    }
+    void setSound(String s){
+        sound=s;
+    }
+    String getType(){
+        return type;
+    }
+    String getSound(){
+        return sound;
+    }
+    void display(){
+        System.out.println("Type"+type);
+        System.out.println("Sound"+sound);
+    }
+}
+class Main{
+    public static void main(String[] args){
+         Animal a = new Animal();
+         a.setType("dog");
+         a.setSound("bark");
+         a.display();
+    }
+}
