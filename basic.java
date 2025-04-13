@@ -1149,3 +1149,56 @@ public class BankingSystem {
         }
     }
 }
+import java.util.*;
+class Student{
+    private int id;
+    private String name;
+    private double cpga;
+    void setId(int i){
+        id=i;
+    }
+    void setName(String n){
+        name=n;
+    }
+    void setCpga(double c){
+        cpga =c;
+    }
+    int getId(){
+        return id;
+    }
+    String getName(){
+        return name;
+    }
+    double getCpga(){
+        return cpga;
+    }
+
+    void display(){
+        System.out.println(/*id+name+*/cpga);
+    }
+
+}
+class Main{
+    public static void main(String[] args){
+         Student s[]=new Student[3];
+         Scanner sc=new Scanner(System.in);
+         for(int i=0;i<s.length;++i){
+            s[i] =new Student();
+            //s[i].setId(sc.nextInt());
+           // sc.nextLine();
+           // s[i].setName(sc.nextLine());
+            s[i].setCpga(sc.nextDouble());
+         }
+          for(int i=0;i<s.length;++i){
+            s[i].display();   
+            
+         }int high=0
+         for(int i=0;i<s.length;i++){
+            if(s[i].getCpga()>s[high].getCpga()){
+                high=i;
+            }
+         }
+         s[high]=display();
+
+    }
+}
