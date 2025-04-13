@@ -82,3 +82,45 @@ The dog bark
 Animal eats :+6
 Dog barks*/
   
+class Animal{
+    void Eat(){
+        System.out.println("Animal eats :+6");
+    }
+}
+class Dog extends Animal{
+    @Override
+    void Eat(){
+        System.out.println("The dog bark");
+       
+    }
+
+}
+
+class Main{
+    public static void main(String[] args){
+        Dog c= new Dog();
+        c.Eat();
+      
+        
+    }
+}
+class Animal{
+    void Eat(){
+        System.out.println("Animal eats :+6");
+    }
+}
+class Dog extends Animal{
+    Dog(){
+     super();
+     System.out.println("d");
+    
+    }
+
+}
+
+class Main{
+    public static void main(String[] args){
+        Dog d= new Dog();
+          
+    }
+}
