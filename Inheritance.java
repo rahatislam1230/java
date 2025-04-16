@@ -253,3 +253,129 @@ public class Main {
         st.displayInfo();
     }
 }
+class Person{
+    private String name;
+    private int age;
+    Person(String name,int age){
+        this.name= name;
+        this.age =age;
+    }
+    void setName(String name){
+        this.name= name;
+    }
+    void setAge(int age){
+        this.age=age;
+    }
+    String getName(){
+        return name;
+    }
+    int getAge(){
+        return age;
+    }
+    void displayInfo(){
+        System.out.println("name"+name);
+        System.out.println("age"+age);
+    }
+}
+class Student extends Person{
+    private String studentId;
+    private String course;
+    Student(String name,int age,String studentId,String course){
+        super(name,age);
+        this.studentId=studentId;
+        this.course=course;
+    }
+    void setStudentid(String studentId){
+        this.studentId=studentId;
+    }
+    void setcoure(String course){
+        this.course=course;
+    }
+    String getstudent(){
+        return studentId;
+    }
+    String getCours(){
+        return course;
+    }
+    @Override
+    void displayInfo(){
+        super.displayInfo();
+        System.out.println("Student ID:"+studentId);
+        System.out.println("Course"+ course);
+    }
+}
+class Teacher extends Person{
+    String teacherId;
+    String subject;
+    double salary;
+    Teacher(String name,int age,String teacherId,String subject,double salary){
+        super(name, age);
+        this.teacherId=teacherId;
+        this.subject=subject;
+        this.salary=salary;
+    }
+    void setTeacherid(String teacherId){
+        this.teacherId=teacherId;
+    }
+    void setSubject(String subject){
+        this.subject=subject;
+    }
+    void setSalar(double salary){
+        this.salary=salary;
+    }
+    String getteacher(){
+        return teacherId;
+    }
+    String getSubject(){
+        return subject;
+    }
+    double getSalary(){
+        return salary;
+    }
+
+    @Override
+    void displayInfo(){
+        super.displayInfo();
+        System.out.println("teacher Id :"+teacherId);
+        System.out.println("subject:"+subject);
+        System.out.println("salary:"+salary);
+    }
+}
+class Staff extends Person{
+    String department;
+    String shift;
+    Staff(String name,int age,String department,String shift){
+        super(name, age);
+        this.department=department;
+        this.shift=shift;
+    }
+    void setDep(String department){
+        this.department=department;
+    }
+    void setshif(String shift){
+        this.shift=shift;
+    }
+    String getDep(){
+        return department;
+    }
+    String getshift(){
+        return shift;
+    }
+    @Override
+    void displayInfo(){
+        super.displayInfo();
+        System.out.println("department"+department);
+        System.out.println("shift"+shift);
+    }
+}
+
+public class Start {
+    public static void main(String[] args) {
+        Person s= new Student("rahat",20,"s540","Cse");
+        Person t = new Teacher("hj",45,"T202","java",75000.0);
+        Person sf =new Staff("hi",38,"it","night");
+        s.displayInfo();
+        t.displayInfo();
+        sf.displayInfo();
+    }
+}
