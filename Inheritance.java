@@ -621,3 +621,125 @@ public class Start {
 
     }
 }
+class Employee{
+    private String name;
+    private  String id;
+    Employee(String name,String id){
+        this.name=name;
+        this.id=id;
+    }
+    void setName(String name){
+        this.name=name;
+    }
+    void setId(String id){
+        this.id=id;
+    }
+    String getName(){
+        return name;
+    }
+    String getId(){
+        return id;
+    }
+    void displayInfo(){
+        System.out.println("name"+name);
+        System.out.println("Id:"+id);
+    }
+}
+class Manager extends Employee{
+    private String department;
+    private int teamSize;
+    Manager(String name,String id,String department, int teamSize){
+        super(name,id);
+        this.department=department;
+        this.teamSize=teamSize;
+    }
+    void setDep(String department){
+        this.department=department;
+    }
+    String getdep(){
+        return department;
+    }
+    void setTeamsize(int teamSize){
+        this.teamSize=teamSize;
+    }
+    int getTeam(){
+        return teamSize;
+    }
+    @Override
+    void displayInfo(){
+        super.displayInfo();
+        System.out.println("department"+department);
+        System.out.println("teamSize:"+teamSize);
+    }
+}
+class Developer extends Employee{
+    private String programmingleague;
+    private int experience;
+    Developer(String name,String id,String programmingleague, int experience){
+        super(name,id);
+        this.programmingleague=programmingleague;
+        this.experience=experience;
+    }
+    void setpro(String programmingleague){
+        this.programmingleague=programmingleague;
+    }
+    String getpro(){
+        return programmingleague;
+    }
+    void setexp(int experience){
+        this.experience=experience;
+    }
+    int getexp(){
+        return experience;
+    }
+    @Override
+    void displayInfo(){
+        super.displayInfo();
+        System.out.println("programmingleague"+programmingleague);
+        System.out.println("experience:"+experience);
+    }
+}
+class Intern extends Employee{
+    private String university;
+    private int durationMonth;
+    Intern(String name,String id,String university, int durationMonth){
+        super(name,id);
+        this.university=university;
+        this.durationMonth=durationMonth;
+    }
+    void setuni(String university){
+        this.university=university;
+    }
+    String getuni(){
+        return university;
+    }
+    void setduraM(int durationMonth){
+        this.durationMonth=durationMonth;
+    }
+    int getexp(){
+        return durationMonth;
+    }
+    @Override
+    void displayInfo(){
+        super.displayInfo();
+        System.out.println("university"+university);
+        System.out.println("durationMonth:"+durationMonth);
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Manager m= new Manager("raht","0dt","hkj5",14);
+        Developer d =new Developer("kj","k5jk","hij",452);
+        Intern i =new Intern("ijkj","H5jk","Lij",789);
+        m.displayInfo();
+        d.displayInfo();
+        i.displayInfo();
+        Employee[] e = new Employee[3];
+
+        for (int j = 0; j < e.length; j++)  {
+            e[j] = new Employee("rahat","rah45");
+        }
+
+
+    }
+}
