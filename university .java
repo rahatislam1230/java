@@ -131,3 +131,47 @@ class Person {
  
 	public String getName() {
 		return name;
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student();
+        Employee e = new Employee();
+        Person p = new Person();
+
+        System.out.println("start");
+        p.display();
+        e.display();
+        s.display();
+        System.out.println("end");
+    }
+}
+
+class Person {
+    static int count;
+
+    Person() {
+        System.out.println("person " + count);
+        for (int i = 0; i < 3; i++) {
+            if (i % 2 == 0) {
+                count++;
+            } else {
+                System.out.println("no");
+            }
+        }
+    }
+
+    void display() {
+        System.out.println("counter " + count);
+    }
+}
+
+class Employee extends Person {
+    Employee() {
+        System.out.println("employee = " + count);
+    }
+}
+
+class Student extends Person {
+    Student() {
+        System.out.println("student " + count);
+    }
+}
