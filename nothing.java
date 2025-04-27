@@ -132,3 +132,47 @@ class Start{
         m.displayCharacterInfo();
     }
 }
+class BankAccount{
+    private String accountHolderName;
+    private int accountNumber;
+    private double balance;
+    void setAc(String accountHolderName){
+        this.accountHolderName=accountHolderName;
+    }
+    String getAc(){
+        return accountHolderName;
+    }
+    void setAn(int accountNumber){
+        this.accountNumber=accountNumber;
+    }
+    int getAn(){
+        return accountNumber;
+    }
+    void setBal(double balance){
+        this.balance=balance;
+    }
+    double getBal(){
+        return balance;
+    }
+    void displayAccountInfo(){
+        System.out.println(accountHolderName+""+accountNumber+""+balance);
+    }
+}
+class SavingsAccount extends BankAccount{
+    private double interestRate;
+    SavingsAccount(String accountHolderName,int accountNumber,double balance,double interestRate){
+        super(accountHolderName,accountNumber,balance);
+        this.interestRate=interestRate;
+    }
+    void setIntR(double interestRate){
+        this.interestRate=interestRate;
+    }
+    double getIntR(){
+        return interestRate;
+    }
+    @Override
+    void displayAccountInfo(){
+        super.displayAccountInfo();
+        System.out.println(accountHolderName+""+accountNumber+""+balance+""+interestRate);
+    }
+}
