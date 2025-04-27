@@ -176,3 +176,145 @@ class SavingsAccount extends BankAccount{
         System.out.println(accountHolderName+""+accountNumber+""+balance+""+interestRate);
     }
 }
+class Vehicle{
+    private String brand;
+    private String model;
+    Vehicle(String brand,String model){
+        this.brand=brand;
+        this.model=model;
+    }
+    void setBrand(String brand){
+        this.brand=brand;
+    }
+    String getBrand(){
+        return brand;
+    }
+    void setModel(String model){
+        this.model=model;
+    }
+    String getModel(){
+        return model;
+    }
+    void displayVehicleInfo(){
+        System.out.println(brand+""+model);
+    }
+}
+class Car extends Vehicle{
+    private String type;
+    Car(String brand,String model,String type){
+        super(brand,model);
+        this.type=type;
+    }
+    void setType(String type){
+        this.type=type;
+    }
+    String getType(){
+        return type;
+    }
+    
+    void displayCarInfo(){
+        super.displayVehicleInfo();
+        System.out.println(type);
+    }
+}
+class Start{
+    public static void main(String[] args){
+        Car c= new Car("bmw","b4","hyper");
+        c.displayCarInfo();
+    }
+}
+class BankAccount{
+    private String accountNumber;
+    private int balance;
+    BankAccount(String accountNumber,int balance){
+        this.accountNumber=accountNumber;
+        this.balance= balance;
+    }
+    void setAcN(String accountNumber){
+        this.accountNumber=accountNumber;
+    }
+    String getAcN(){
+        return accountNumber;
+    }
+    void setAcc(int balance){
+        this.balance=balance;
+    }
+    int getAcc(){
+        return balance;
+    }
+    void deposit( double amount){
+        if(amount>0){
+            balance+=amount;
+            System.out.println("deposit"+ amount);
+        }else{
+            System.out.println("No taka");
+        }
+    }
+    void withdraw(double amount){
+        balance -=amount;
+        if(amount>0 && balance>=amount){
+            System.out.println("You have taken"+amount);
+        }else{
+            System.out.println("taka nai");
+        }
+    }
+    void display(){
+        System.out.println(accountNumber+""+balance);
+    }
+}
+class SavingAccount extends BankAccount{
+     private double interestRate;
+     private double loanAmount;
+     SavingAccount(String accountNumber,int balance,double interestRate,double loanAmount){
+        super(accountNumber,balance);
+        this.interestRate=interestRate;
+        this.loanAmount=loanAmount;
+     }
+     void setIR(double interestRate){
+        this.interestRate=interestRate;
+     }
+     double getIR(){
+        return interestRate;
+     }
+     void setLR(double loanAmount){
+        this.loanAmount=loanAmount;
+     }
+     double getLR(){
+        return loanAmount;
+     }
+    /* void applyInterest(double interest){
+        balance= (int)(balance*interest/100);
+     }*/
+     void applyForLoan(double amount){
+        loanAmount +=amount;
+        if(amount>0){
+            System.out.println("loanAmount"+ amount);
+        }else{
+            System.out.println("cant give you loan");
+        }
+     }
+     void repayLoan(double amount){
+        loanAmount -=amount;
+         if(amount>0 && loanAmount>=amount){
+            System.out.println("You curi krsos"+amount);
+        }else{
+            System.out.println("taka nai");
+        }
+    }
+    @Override
+    void display(){
+         super.display();
+         System.out.println(loanAmount+""+interestRate);
+    }
+ 
+}
+class Start{
+    public static void main(String[] args){
+        SavingAccount sa =new SavingAccount("rahat",10000,0.5,5000);
+        sa.withdraw(2000);
+        sa.deposit(50000);
+
+        sa.repayLoan(500);
+        sa.display();
+    }
+}
