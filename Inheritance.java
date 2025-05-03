@@ -853,3 +853,102 @@ class Start{
         sm.info();
     }
 }
+class Course {
+    private String courseName;
+    private String code;
+    private double creditHour;
+    private double courseFee;
+
+
+    Course(String courseName, String code, double creditHour, double courseFee) {
+        this.courseName = courseName;
+        this.code = code;
+        this.creditHour = creditHour;
+        this.courseFee = courseFee;
+    }
+
+    // Setters and Getters
+    void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    String getCourseName() {
+        return courseName;
+    }
+
+    void setCode(String code) {
+        this.code = code;
+    }
+
+    String getCode() {
+        return code;
+    }
+
+    void setCreditHour(double creditHour) {
+        this.creditHour = creditHour;
+    }
+
+    double getCreditHour() {
+        return creditHour;
+    }
+
+    void setCourseFee(double courseFee) {
+        this.courseFee = courseFee;
+    }
+
+    double getCourseFee() {
+        return courseFee;
+    }
+}
+
+class Student {
+    private String name;
+    private String id;
+    private String department;
+    Course[] courses;
+
+
+    Student(String name, String id, String department, Course[] courses) {
+        this.name = name;
+        this.id = id;
+        this.department = department;
+        this.courses = courses;
+    }
+
+
+    double[] calculateTotals() {
+        double totalCredits = 0;
+        double totalFee = 0;
+
+        // Loop through courses and calculate totals
+        for (int i = 0; i < courses.length; i++) {
+            totalCredits += courses[i].getCreditHour();
+            totalFee += courses[i].getCourseFee();
+        }
+
+        return new double[] { totalCredits, totalFee };
+    }
+}
+
+class Start {
+    public static void main(String[] args) {
+
+        Course javaCourse = new Course("Java Programming", "CSE101", 3, 5000);
+        Course dataStructuresCourse = new Course("Data Structures", "CSE102", 4, 6000);
+        Course algorithmsCourse = new Course("Algorithms", "CSE103", 3, 5500);
+        Course[] courses = { javaCourse, dataStructuresCourse, algorithmsCourse };
+
+        Student student = new Student("Amy", "12345", "CSE", courses);
+
+
+        double[] totals = student.calculateTotals();
+
+
+        System.out.println("Total Credits: " + totals[0]);
+        System.out.println("Total Course Fee: " + totals[1]);
+    }
+}
+
+
+
+
