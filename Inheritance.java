@@ -743,3 +743,113 @@ public class Main {
 
     }
 }
+import java.util.Scanner;
+class Battery{
+    private String type;
+    private int capacity;
+    private  double price;
+    Battery(String type,int capacity,double price){
+        this.type=type;
+        this.price=price;
+        this.capacity=capacity;
+    }
+    void setType(String type){
+        this.type=type;
+    }
+    String getType(){
+        return type;
+    }
+    void setCapacity(int capacity){
+        this.capacity=capacity;
+    }
+    int getCapacity(){
+        return capacity;
+    }
+    void setPrice(double price){
+        this.price=price;
+    }
+    double getPrice(){
+        return price;
+    }
+}
+class Camera{
+    private String position;
+    private double price;
+    private int resolutaion;
+    Camera(String position,double price,int resolutaione){
+        this.position=position;
+        this.price=price;
+        this.resolutaion=resolutaion;
+    }
+    void setPrice(double price){
+        this.price=price;
+    }
+    double getPrice(){
+        return price;
+    }
+    void setPosition(String position){
+        this.position=position;
+    }
+    String getPosition(){
+        return position;
+    }
+    void setResoution(int resolutaion){
+        this.resolutaion=resolutaion;
+    }
+    int getResoulion(){
+        return resolutaion;
+    }
+}
+class Smartphone{
+    private String brand;
+    private String model;
+    private double basePrice;
+    Battery battery;
+    Camera []camera;
+    Smartphone(String brand,String model,double basePrice,Battery battery,Camera[]camera){
+        this.brand=brand;
+        this.model=model;
+        this.basePrice=basePrice;
+        this.battery=battery;
+        this.camera=camera;
+    }
+    double Calculte(){
+        double sum =basePrice+battery.getPrice();
+        for(int i=0;i<camera.length;i++){
+            sum+=camera[i].getPrice();
+        }
+        return sum;
+    }
+    void info(){
+        System.out.println("brand"+brand+"model:"+model+"basePrice"+basePrice+"battery:"+battery.getPrice()+battery.getType()+battery.getCapacity());
+        for(int i=0;i<camera.length;i++){
+            System.out.println(camera[i].getPrice()+camera[i].getPosition()+camera[i].getResoulion());
+        }
+        System.out.println("total"+Calculte());
+    }
+}
+class Start{
+    public static void main(String[]args){
+        Scanner sc= new Scanner(System.in);
+        String brand=sc.nextLine();
+        String model=sc.nextLine();
+        sc.nextLine();
+        double basePrice=sc.nextDouble();
+        String type=sc.nextLine();
+        sc.nextLine();
+        int capacity=sc.nextInt();
+        double mprice=sc.nextDouble();
+        Battery battery = new Battery(type,capacity,mprice);
+        Camera [] camera= new Camera[3];
+        for(int i=0;i<3;i++){
+            sc.nextLine();
+            String position=sc.nextLine();
+            sc.nextLine();
+            double price=sc.nextDouble();
+            int resolutaione=sc.nextInt();
+            camera[i]=new Camera(position,price,resolutaione);
+        }
+        Smartphone sm=new Smartphone(brand,model,basePrice,battery,camera);
+        sm.info();
+    }
+}
