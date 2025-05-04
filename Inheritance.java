@@ -949,6 +949,233 @@ class Start {
     }
 }
 
+import java.util.Scanner;
+class Customer{
+    private String name;
+    private String phone;
+    private String address;
+    Customer(String name,String phone,String address){
+        this.name=name;
+        this.phone=phone;
+        this.address=address;
+    }
+    void setName(String name){
+        this.name=name;
+    }
+    String getName(){
+        return name;
+    }
+    void setPhone(String phone){
+        this.phone=phone;
+    }
+    String getPhone(){
+        return phone;
+    }
+    void setAddress(String address){
+        this.address=address;
+    }
+    String getAddres(){
+        return address;
+    }
+}
+class Book{
+    private String title;
+    private String author;
+    private double price;
+    private int quantity;
+    Book(String title,String author,double price,int quantity){
+        this.title=title;
+        this.author=author;
+        this.price=price;
+        this.quantity=quantity;
+    }
+    void setTilte(String title){
+        this.title=title;
+    }
+    String getTilte(){
+        return title;
+    }
+    void setAuthor(String author){
+        this.author=author;
+    }
+    String getAuthor(){
+        return author;
+    }
+    void setPice(double price){
+        this.price=price;
+    }
+    double getPrice(){
+        return price;
+    }
+    void setQuantity(int quantity){
+        this.quantity=quantity;
+    }
+    int getQuantity(){
+        return quantity;
+    }
+}
+class Bookstore{
+    private Customer customer;
+    private Book [] book;
+    Bookstore(Customer customer,Book []book){
+        this.customer=customer;
+        this.book=book;
+    }
+    double calcu(){
+        double total=0;
+        for(int i=0;i<book.length;i++){
+            total+=book[i].getPrice();
+        }
+        return total;
+    }
+    void show(){
+        System.out.println(customer.getName()+customer.getPhone()+customer.getAddres());
+        for(int i=0;i<book.length;i++){
+            System.out.println(book[i].getTilte()+book[i].getAuthor()+book[i].getQuantity());
+        }
+        System.out.println(calcu());
+    }
+
+}
+class Start {
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        String name=sc.nextLine();
+        String phone=sc.nextLine();
+        String address=sc.nextLine();
+        Customer cs=new Customer(name, phone,address);
+        Book book[]=new Book[3];
+        for(int i=0;i<3;i++){
+            String title=sc.nextLine();
+            String author=sc.nextLine();
+            sc.nextLine();
+            double price=sc.nextDouble();
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            book[i]=new Book(title,author, price, quantity);
+        }
+        Bookstore bs = new Bookstore(cs,book);
+        bs.show();
+    }
+}
+import java.util.Scanner;
+class Ram{
+    private String brand;
+    private  int size;
+    private double price;
+    Ram(String brand,int size,double price){
+        this.brand=brand;
+        this.size=size;
+        this.price=price;
+    }
+    void setBrand(String brand){
+        this.brand=brand;
+    }
+    String getBrand(){
+        return brand;
+    }
+    void setSize(int size){
+        this.size=size;
+    }
+    int getSize(){
+        return size;
+    }
+    void setPirce(double price){
+        this.price=price;
+    }
+    double getPirce(){
+        return price;
+    }
+}
+class Cpu{
+    private String type;
+    private double clockSpeed;
+    private double price;
+    Cpu(String type,double clockSpeed,double price){
+        this.type=type;
+        this.clockSpeed=clockSpeed;
+        this.price=price;
+    }
+    void setType(String type){
+        this.type=type;
+    }
+    String getType(){
+        return type;
+    }
+    void setClockspeed(double clockSpeed){
+        this.clockSpeed=clockSpeed;
+    }
+    double getClockspeed(){
+        return clockSpeed;
+    }
+    void setPrice(double price){
+        this.price=price;
+    }
+    double getPrice(){
+        return price;
+    }
+}
+class Computer{
+    private String brand;
+    private String model;
+    private double basePrice;
+    private Ram []ram;
+    private Cpu cpu;
+    Computer(String brand,String model,double basePrice,Ram []ram,Cpu cpu){
+        this.brand=brand;
+        this.model=model;
+        this.basePrice=basePrice;
+        this.ram=ram;
+        this.cpu=cpu;
+    }
+    double Calculor(){
+        double sum=0;
+        sum+=cpu.getPrice();
+        for(int i=0;i<ram.length;i++){
+            sum+=ram[i].getPirce();
+        }
+        return sum;
+    }
+    void info(){
+        System.out.println(cpu.getType()+cpu.getClockspeed()+cpu.getPrice());
+        for(int i=0;i<ram.length;i++){
+            System.out.println(ram[i].getSize()+ram[i].getBrand()+ram[i].getPirce());
+        }
+        System.out.println(Calculor());
+    }
+}
+class Start {
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        String brand=sc.nextLine();
+        String model=sc.nextLine();
+        sc.nextLine();
+        double basePrice=sc.nextDouble();
+        String type= sc.nextLine();
+        sc.nextLine();
+        double clockSpeed=sc.nextDouble();
+        double price=sc.nextDouble();
+        Cpu cpu= new Cpu(type,clockSpeed, price);
+        Ram ram[]=new Ram[3];
+        for(int i=0;i<3;i++){
+           String mbrand=sc.nextLine();
+           sc.nextLine();
+           int size=sc.nextInt();
+           sc.nextLine();
+           double mprice=sc.nextDouble();
+           ram[i]=new Ram(mbrand,size,mprice);
+        }
+       Computer cp=new Computer(brand,model, basePrice,ram,cpu);
+       cp.info();
+    }
+}
+
+
+
+
+
+
+
 
 
 
