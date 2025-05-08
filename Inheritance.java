@@ -1277,6 +1277,331 @@ class Start {
         h.info();
     }
 }
+import java.util.Scanner;
+
+class Cpu {
+    private String brand;
+    private double price;
+
+    public Cpu(String brand, double price) {
+        this.brand = brand;
+        this.price = price;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+
+class Ram {
+    private int sizeGB;
+    private double price;
+
+    public Ram(int sizeGB, double price) {
+        this.sizeGB = sizeGB;
+        this.price = price;
+    }
+
+    public void setSizeGB(int sizeGB) {
+        this.sizeGB = sizeGB;
+    }
+
+    public int getSizeGB() {
+        return sizeGB;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+
+class Computer {
+    private String brand;
+    private String model;
+    private double basePrice;
+    private Cpu cpu;
+    private Ram[] ramList;
+
+    public Computer(String brand, String model, double basePrice, Cpu cpu, Ram[] ramList) {
+        this.brand = brand;
+        this.model = model;
+        this.basePrice = basePrice;
+        this.cpu = cpu;
+        this.ramList = ramList;
+    }
+
+    public double calculateTotalPrice() {
+        double total = basePrice + cpu.getPrice();
+        for (int i = 0; i < ramList.length; i++) {
+            total += ramList[i].getPrice();
+        }
+        return total;
+    }
+
+    public void showInfo() {
+        System.out.println("Brand: " + brand);
+        System.out.println("Model: " + model);
+        System.out.println("Base Price: $" + basePrice);
+        System.out.println("CPU: " + cpu.getBrand() + " ($" + cpu.getPrice() + ")");
+        for (int i = 0; i < ramList.length; i++) {
+            System.out.println("RAM " + (i + 1) + ": " + ramList[i].getSizeGB() + "GB ($" + ramList[i].getPrice() + ")");
+        }
+        System.out.println("Total Price: $" + calculateTotalPrice());
+    }
+}
+
+class GamingComputer extends Computer {
+    private String gpuModel;
+    private double gpuPrice;
+
+    public GamingComputer(String brand, String model, double basePrice, Cpu cpu, Ram[] ramList, String gpuModel, double gpuPrice) {
+        super(brand, model, basePrice, cpu, ramList);
+        this.gpuModel = gpuModel;
+        this.gpuPrice = gpuPrice;
+    }
+
+    @Override
+    public double calculateTotalPrice() {
+        return super.calculateTotalPrice() + gpuPrice;
+    }
+
+    @Override
+    public void showInfo() {
+        super.showInfo();
+        System.out.println("GPU: " + gpuModel + " ($" + gpuPrice + ")");
+        System.out.println("Total Gaming Computer Price: $" + calculateTotalPrice());
+    }
+}
+
+public class Start {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        // Input CPU
+        System.out.print("Enter CPU Brand: ");
+        String cpuBrand = input.nextLine();
+        System.out.print("Enter CPU Price: ");
+        double cpuPrice = input.nextDouble();
+        Cpu cpu = new Cpu(cpuBrand, cpuPrice);
+
+        // Input RAMs
+        System.out.print("Enter number of RAM modules: ");
+        int ramCount = input.nextInt();
+        Ram[] ramList = new Ram[ramCount];
+
+        for (int i = 0; i < ramCount; i++) {
+            System.out.print("Enter size (GB) of RAM " + (i + 1) + ": ");
+            int size = input.nextInt();
+            System.out.print("Enter price of RAM " + (i + 1) + ": ");
+            double price = input.nextDouble();
+            ramList[i] = new Ram(size, price);
+        }
+
+        input.nextLine();
+
+     
+        System.out.print("Enter Computer Brand: ");
+        String brand = input.nextLine();
+        System.out.print("Enter Model: ");
+        String model = input.nextLine();
+        System.out.print("Enter Base Price: ");
+        double basePrice = input.nextDouble();
+
+        input.nextLine(); 
+
+        System.out.print("Is this a Gaming Computer? (yes/no): ");
+        String isGaming = input.nextLine();
+
+        Computer comp;
+        if (isGaming.equalsIgnoreCase("yes")) {
+            System.out.print("Enter GPU Model: ");
+            String gpuModel = input.nextLine();
+            System.out.print("Enter GPU Price: ");
+            double gpuPrice = input.nextDouble();
+            comp = new GamingComputer(brand, model, basePrice, cpu, ramList, gpuModel, gpuPrice);
+        } else {
+            comp = new Computer(brand, model, basePrice, cpu, ramList);
+        }
+
+        System.out.println("\n--- Computer Information ---");
+        comp.showInfo();
+
+        input.close();
+    }
+}
+import java.util.Scanner;
+class Cpu {
+    private String brand;
+    private double price;
+    Cpu(String brand, double price) {
+        this.brand = brand;
+        this.price = price;
+    }
+
+    void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    String getBrand() {
+        return brand;
+    }
+
+    void setPrice(double price) {
+        this.price = price;
+    }
+
+    double getPrice() {
+        return price;
+    }
+}
+class Ram {
+    private int sizeGB;
+    private double price;
+
+    Ram(int sizeGB, double price) {
+        this.sizeGB = sizeGB;
+        this.price = price;
+    }
+
+    void setSizeGb(int sizeGB) {
+        this.sizeGB = sizeGB;
+    }
+
+    int getSizeGb() {
+        return sizeGB;
+    }
+
+    void setPrice(double price) {
+        this.price = price;
+    }
+
+    double getPrice() {
+        return price;
+    }
+}
+class Computer {
+    private String brand;
+    private String model;
+    private double basePrice;
+    private Cpu cpu;         
+    private Ram[] ram;       
+
+    Computer(String brand, String model, double basePrice, Cpu cpu, Ram[] ram) {
+        this.brand = brand;
+        this.model = model;
+        this.basePrice = basePrice;
+        this.cpu = cpu;
+        this.ram = ram;
+    }
+    void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    String getBrand() {
+        return brand;
+    }
+    void setModel(String model) {
+        this.model = model;
+    }
+    String getModel() {
+        return model;
+    }
+    void setBasePrice(double basePrice) {
+        this.basePrice = basePrice;
+    }
+    double getBasePrice() {
+        return basePrice;
+    }
+    Cpu getCpu() {
+        return cpu;
+    }
+    Ram[] getRamArray() {
+        return ram;
+    }
+
+    double calculateTotalPrice() {
+        double total = basePrice + cpu.getPrice();
+        for (int i = 0; i < ram.length; i++) {
+            total += ram[i].getPrice();
+        }
+        return total;
+    }
+
+    void showInfo() {
+        System.out.println("Computer Brand: " + brand);
+        System.out.println("Model: " + model);
+        System.out.println("Base Price: " + basePrice);
+        System.out.println("CPU: " + cpu.getBrand() + ", Price: " + cpu.getPrice());
+
+        for (int i = 0; i < ram.length; i++) {
+            System.out.println("RAM " +  ram[i].getSizeGb() + "GB, Price: " + ram[i].getPrice());
+        }
+
+        System.out.println("Total Price: " + calculateTotalPrice());
+    }
+}
+
+class GamingComputer extends Computer {
+    private String gpuModel;
+    private double gpuPrice;
+    GamingComputer(String brand, String model, double basePrice, Cpu cpu, Ram[] ram, String gpuModel, double gpuPrice) {
+        super(brand, model, basePrice, cpu, ram); 
+        this.gpuModel = gpuModel;
+        this.gpuPrice = gpuPrice;
+    }
+    void setGpuModel(String gpuModel) {
+        this.gpuModel = gpuModel;
+    }
+    String getGpuModel() {
+        return gpuModel;
+    }
+    void setGpuPrice(double gpuPrice) {
+        this.gpuPrice = gpuPrice;
+    }
+    double getGpuPrice() {
+        return gpuPrice;
+    }
+    double calculateTotalPrice() {
+        double total = getBasePrice() + getCpu().getPrice() + gpuPrice;
+        for (int i = 0; i < getRamArray().length; i++) {
+            total += getRamArray()[i].getPrice();
+        }
+        return total;
+    }
+    void showInfo() {
+        super.showInfo();
+        System.out.println("GPU Model: " + gpuModel + ", GPU Price: " + gpuPrice);
+        System.out.println("Total Gaming Computer Price: " + calculateTotalPrice());
+    }
+}
+public class Start {
+    public static void main(String[] args) {
+        Cpu cpu = new Cpu("Intel i7", 300.0);
+        Ram[] rams = {
+            new Ram(8, 50.0),
+            new Ram(8, 50.0)
+        };
+
+        GamingComputer gc = new GamingComputer("Asus", "ROG Strix", 500.0, cpu, rams, "NVIDIA RTX 4070", 600.0);
+        gc.showInfo();
+    }
+}
 
 
 
