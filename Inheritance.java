@@ -1603,6 +1603,71 @@ public class Start {
     }
 }
 
+class Computer {
+    String brand;
+    double basePrice;
+
+    Computer(String brand, double basePrice) {
+        this.brand = brand;
+        this.basePrice = basePrice;
+    }
+
+    double calculateTotalPrice() {
+        return basePrice;
+    }
+
+    void showInfo() {
+        System.out.println("Computer Brand: " + brand);
+        System.out.println("Base Price: $" + basePrice);
+    }
+}
+
+class GamingComputer extends Computer {
+    String gpuModel;
+    double gpuPrice;
+
+    GamingComputer(String brand, double basePrice, String gpuModel, double gpuPrice) {
+        super(brand, basePrice);
+        this.gpuModel = gpuModel;
+        this.gpuPrice = gpuPrice;
+    }
+
+    @Override
+    double calculateTotalPrice() {
+        return basePrice + gpuPrice;
+    }
+
+    @Override
+    void showInfo() {
+        super.showInfo();
+        System.out.println("GPU Model: " + gpuModel);
+        System.out.println("GPU Price: $" + gpuPrice);
+    }
+
+    void extraGamingFeature() {
+        System.out.println("Extra gaming feature enabled!");
+    }
+}
+
+public class Start {
+    public static void main(String[] args) {
+        
+        GamingComputer gamingPC = new GamingComputer("Asus", 1000.0, "RTX 4080", 1200.0);
+
+        Computer comp = gamingPC;
+
+        comp.showInfo();
+        System.out.println("Total Price: $" + comp.calculateTotalPrice());
+
+      
+        ((GamingComputer) comp).extraGamingFeature();  
+        
+        if (comp instanceof GamingComputer) {
+            GamingComputer gComp = (GamingComputer) comp;
+            gComp.extraGamingFeature(); 
+        }
+    }
+}
 
 
 
