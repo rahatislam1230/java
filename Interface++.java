@@ -134,3 +134,68 @@ public class Start{
 
     }
 }
+// Interface definition (shows polymorphism capability)
+interface PersonInfo {
+    String getName();
+    String getID();
+}
+
+// Student implementation
+class Student implements PersonInfo {
+    private String name;
+    private String studentId;
+
+    public Student(String name, String studentId) {
+        this.name = name;
+        this.studentId = studentId;
+    }
+
+    @Override
+    public String getName() {
+        return "Student: " + name;
+    }
+
+    @Override
+    public String getID() {
+        return "S-" + studentId;
+    }
+}
+
+// Teacher implementation
+class Teacher implements PersonInfo {
+    private String name;
+    private String employeeId;
+
+    public Teacher(String name, String employeeId) {
+        this.name = name;
+        this.employeeId = employeeId;
+    }
+
+    @Override
+    public String getName() {
+        return "Professor: " + name;
+    }
+
+    @Override
+    public String getID() {
+        return "T-" + employeeId;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create array of PersonInfo objects (polymorphism)
+        PersonInfo[] people = new PersonInfo[3];
+        people[0] = new Student("Alice Johnson", "1001");  // Student as PersonInfo
+        people[1] = new Teacher("Dr. Smith", "2001");     // Teacher as PersonInfo
+        people[2] = new Student("Bob Wilson", "1002");    // Another Student
+
+        // Process using normal for loop (polymorphism in action)
+        System.out.println("School Personnel Details:");
+        for (int i = 0; i < people.length; i++) {
+            PersonInfo person = people[i];
+            // The same method call behaves differently based on actual object type
+            System.out.println(person.getName() + " | ID: " + person.getID());
+        }
+    }
+}
