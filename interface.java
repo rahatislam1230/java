@@ -591,3 +591,82 @@ class Main{
         System.out.println(A.age);// always final
     }
 }
+interface Engine {
+    int MAX_SPEED = 240; // final & static by default
+
+    void start();
+    void stop();
+}
+
+interface Electric extends Engine {
+    void charge();
+}
+
+interface FuelPowered {
+    void refuel();
+}
+
+abstract class Vehicle {
+    public abstract void drive();
+
+    public void horn() {
+        System.out.println("Beep beep!");
+    }
+}
+
+abstract class Tesla extends Vehicle implements Electric {
+    public void start() {
+        System.out.println("Electric engine started");
+    }
+
+    public void stop() {
+        System.out.println("Electric engine stopped");
+    }
+
+    public void charge() {
+        System.out.println("Charging the Tesla");
+    }
+}
+
+class ModelX extends Tesla {
+    public void drive() {
+        System.out.println("Driving Model X...");
+    }
+}
+
+class Toyota extends Vehicle implements FuelPowered {
+    public void drive() {
+        System.out.println("Driving Toyota...");
+    }
+
+    public void refuel() {
+        System.out.println("Refueling Toyota...");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Vehicle car1 = new ModelX();      // Polymorphism
+        car1.drive();                     // Output: Driving Model X...
+        car1.horn();                      // Output: Beep beep!
+
+        Electric elec = new ModelX();     // Interface ref
+        elec.start();                     // Output: Electric engine started
+        elec.charge();                    // Output: Charging the Tesla
+        System.out.println(Electric.MAX_SPEED); // Output: 240
+
+        Vehicle car2 = new Toyota();      // Another polymorphic object
+        car2.drive();                     // Output: Driving Toyota...
+        car2.horn();                      // Output: Beep beep!
+
+     
+        ((Toyota)car2).refuel();
+
+        // Anonymous inner class
+        Vehicle bike = new Vehicle() {
+            public void drive() {
+                System.out.println("Driving an anonymous bike");
+            }
+        };
+        bike.drive();                     // Output: Driving an anonymous bike
+    }
+}
