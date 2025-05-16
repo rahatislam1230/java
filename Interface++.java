@@ -199,3 +199,111 @@ public class Main {
         }
     }
 }
+class IDcard{
+    private String idnum;
+    private String issueDa;
+    IDcard(String idnum,String issueDa){
+        this.idnum=idnum;
+        this.issueDa=issueDa;
+    }
+    void setIdNum(String idnum){
+        this.idnum=idnum;
+    }
+    String getIdNum(){
+        return idnum;
+    }
+    void setIssueD(String issueDa){
+        this.issueDa=issueDa;
+    }
+    String getIssueD(){
+        return issueDa;
+    }
+}
+interface PersonaInfo{
+    String getName();
+    String getId();
+}
+class Student implements PersonaInfo{
+    private String name;
+    private String studentid;
+    private IDcard idCard;
+    public Student(String name,String studentid,IDcard idCard){
+        this.name=name;
+        this.studentid=studentid;
+        this.idCard=idCard;
+    }
+    public void setName(String name){
+        this.name=name;
+    }
+    public String getName(){
+        return name;
+    }
+    public void setID(String studentid){
+        this.studentid=studentid;
+    }
+    public String getId(){
+        return studentid;
+    }
+    public void setIdCard(IDcard idCard){
+        this.idCard=idCard;
+    }
+    public IDcard getIdCard(){
+        return idCard;
+    }
+}
+class Teacher implements PersonaInfo{
+    private String tname;
+    private String teacherid;
+    private IDcard idCard;
+    public Student(String tname,String teacherid){
+        this.tname=tname;
+        this.teacherid=teacherid; 
+    }
+    public void setName(String tname){
+        this.tname=tname;
+    }
+    public String getName(){
+        return tname;
+    }
+    public void setID(String teacherid){
+        this.teacherid=teacherid;
+    }
+    public String getId(){
+        return teacherid;
+    }
+}
+class Course{
+    private String courseName;
+    private Teacher teacher;
+    public Course(String courseName){
+        this.courseName=courseName;
+    }
+    public void setTeacher(Teacher teacher){
+        this.teacher=teacher;
+    }
+    public Teacher getTeacher(){
+        return teacher;
+    }
+    public void setCourseName(String courseName) {
+        this.courseName=courseName;
+    }
+    public String getCourseName() {
+        return courseName;
+    }
+}
+final class FinalExam {
+    private String examName;
+    public FinalExam(String examName) {
+        this.examName = examName;
+    }
+    public final void announceResults() {
+        System.out.println("Official results for " + examName + " have been published!");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+      
+
+      //////
+    }
+}
