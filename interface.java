@@ -172,3 +172,422 @@ class Start {
         System.out.println("Square: " + ((MyMath)p).sq(5));
     }
 }
+// is a relasonship
+//Inheritance child/sub/derived is parent/super/base//
+// single level inheritance
+class Calc{
+    public  int add(int n1,int n2){
+        return n1+n2;
+    }
+    public int sub(int n1,int n2){
+        return  n1 - n2;
+    }
+}// redundancy is a crime //
+class AdvCal extends Calc{
+    public  int multi(int n1,int n2){
+        return n1*n2;
+    }
+    public int div(int n1,int n2){
+        return  n1/n2;
+    }
+}
+class Main{
+    public static void main(String[] args){
+     AdvCal obj = new AdvCal();
+     int r1 =obj.add(4,5);
+     int r2=obj.sub(7,3);
+     int r3 =obj.multi(4,5);
+     int r4=obj.div(7,3);
+        System.out.println(r1+ " " +r2+ "" +r3+ " " +r4);
+    }
+}
+//multi level inheritance
+class Calc{
+    public  int add(int n1,int n2){
+        return n1+n2;
+    }
+    public int sub(int n1,int n2){
+        return  n1 - n2;
+    }
+}// redundancy is a crime //
+class AdvCal extends Calc{
+    public  int multi(int n1,int n2){
+        return n1*n2;
+    }
+    public int div(int n1,int n2){
+        return  n1/n2;
+    }
+}
+class VeryAdvCal extends AdvCal{
+    public  double power(int n1,int n2){
+        return Math.pow(n1,n2);
+    }
+
+}
+class Main{
+    public static void main(String[] args){
+     VeryAdvCal obj = new VeryAdvCal();
+     int r1 =obj.add(4,5);
+     int r2=obj.sub(7,3);
+     int r3 =obj.multi(4,5);
+     int r4=obj.div(7,3);
+     double r5=obj.power(8,5)
+        System.out.println(r1+ " " +r2+ "" +r3+ " " +r4+ " "+r5);
+    }
+}
+// ambiguity problem multiple inheritance doest work
+class  A{
+
+}
+class B{
+
+}
+class C{
+    
+}///
+// polymorphism
+class  A{
+    public void show(){
+        System.out.println("in show A");
+    }
+}
+class B extends A{
+    public void show(){
+        System.out.println("in show B");
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+       A obj = new B();
+       obj.show();
+
+    }
+}
+// polymorphism runtime
+class  A{
+    public void show(){
+        System.out.println("in show A");
+    }
+}
+class B extends A{
+    public void show(){
+        System.out.println("in show B");
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+       A obj = new A();
+       obj.show();
+        obj = new B();
+        obj.show();
+        
+
+    }
+}
+// final - method variable class
+// it stops inheritance
+ class Cal{
+    public final void show(){
+        System.out.println("in show");
+    }
+    public void add(int a,int b){
+        System.out.println(a+b);
+    }
+}
+class AdvC extends Cal{
+    // it stops inheritance in class
+    public void show(){
+        System.out.println("in show");// it cant override it
+    }
+}
+class Main{
+    public static void main(String[] args){
+        Cal obj=new Cal();
+        obj.show();
+        obj.add(4,5);
+    }
+}
+class A{
+    void show1(){
+        System.out.println("in A");
+    }
+}
+class B extends A{
+    void show2(){
+        System.out.println("in B");
+    }
+}
+class Main{
+    public static void main(String[] args){
+         A obj=(A)new B();// upcasting
+         obj.show1();
+
+         B obj1= (B)obj;// down casting
+         obj1.show2();
+         
+        ((B)obj).show2();// down casting
+    }
+}
+//abstract class can have normal method but abstract method must have abstract class
+abstract class Car{
+    public abstract void drive();
+    public abstract  void fly();
+    void playMusice(){
+        System.out.println("play music");
+    }
+}
+class WagonR extends Car{
+    public void drive(){
+        //use Public always
+        System.out.println("driving...");
+    }
+    public void fly(){
+        System.out.println("flying");
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+        Car obj =new WagonR();
+        obj.drive();
+        obj.playMusice();
+        obj.fly();
+    }
+}
+//abstract class can have normal method but abstract method must have abstract class
+abstract class Car{
+    public abstract void drive();
+    public abstract  void fly();
+    void playMusice(){
+        System.out.println("play music");
+    }
+}
+abstract class WagonR extends Car{
+    public void drive(){
+        //use Public always
+        System.out.println("driving...");
+    }
+}
+
+class UpdatedWagon extends WagonR{ // concrete class only has a object
+    public void fly(){
+        System.out.println("flying");
+    }
+}
+class Main{
+    public static void main(String[] args){
+        Car obj =new UpdatedWagon();
+        obj.drive();
+        obj.playMusice();
+        obj.fly();
+    }
+}
+//Inner class
+abstract class A{
+  public abstract void show();
+
+}
+class B extends A{
+    public void show(){
+        System.out.println("in B");
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+        A obj= new A(){// anonyous inner class
+            public void show(){
+                System.out.println("in new a");
+            }
+        };
+        obj.show();
+
+    }
+}
+//interface
+interface A{ // it's not a class but by default class and method becomes abstract
+     void show();
+     void config();
+}
+class B implements A{
+    public void show(){
+        System.out.println("in show");
+    }
+    public void config(){
+        System.out.println("int config");
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+         A obj;
+       /* obj= new A();*/ //you cant instantiate it
+         obj=new B();
+         obj.show();
+         obj.config();
+    }
+}
+//interface
+interface A{ // it's not a class but by default class and method becomes abstract
+    int age;  //  by default every thing in the interface is final and static
+    // so cant use variable without giving it a value
+    void show();
+     void config();
+}
+class B implements A{
+    public void show(){
+        System.out.println("in show");
+    }
+    public void config(){
+        System.out.println("int config");
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+         A obj;
+       /* obj= new A();*/ //you cant instantiate it
+         obj=new B();
+         obj.show();
+         obj.config();
+    }
+}
+//interface
+interface A{ // it's not a class but by default class and method becomes abstract
+    int age=44;
+
+    //  by default every thing in the interface is final and static
+    // so cant use variable without giving it a value
+    void show();
+     void config();
+}
+class B implements A{
+    public void show(){
+        System.out.println("in show");
+    }
+    public void config(){
+        System.out.println("int config");
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+         A obj;
+       /* obj= new A();*/ //you cant instantiate it
+         obj=new B();
+         obj.show();
+         obj.config();
+         A.age=45;// you cant change it
+        System.out.println(A.age);// always final
+    }
+}
+//interface
+interface Computer{
+     void code();
+}
+class  Laptop implements Computer{
+    public void code(){
+        System.out.println("code,compile,run");
+    }
+}
+class Desktop implements Computer{
+    public void code(){
+        System.out.println("code,comile.run faster");
+    }
+}
+class Developer{
+    public void devApp(Computer lab){
+        lab.code();
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+        Computer lab= new Laptop();
+        Computer des= new Desktop();
+        Developer n=new Developer();
+        n.devApp(des);
+
+    }
+}
+//interface
+interface A{ // it's not a class but by default class and method becomes abstract
+    int age=44;
+
+    //  by default every thing in the interface is final and static
+    // so cant use variable without giving it a value
+    void show();
+    void config();
+}
+interface X{
+    void run();
+}
+interface Y extends X{
+
+}
+class B implements A,Y{
+    public void show(){
+        System.out.println("in show");
+    }
+    public void config(){
+        System.out.println("int config");
+    }
+    public void run(){
+        System.out.println("runinng");
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+        A obj;
+
+        obj=new B();
+        obj.show();
+        obj.config();
+        obj.run();// doest work
+
+        System.out.println(A.age);// always final
+    }
+}
+//interface
+interface A{ // it's not a class but by default class and method becomes abstract
+    int age=44;
+
+    //  by default every thing in the interface is final and static
+    // so cant use variable without giving it a value
+    void show();
+    void config();
+}
+interface X{
+    void run();
+}
+interface Y extends X{
+
+}
+class B implements A,Y{
+    public void show(){
+        System.out.println("in show");
+    }
+    public void config(){
+        System.out.println("int config");
+    }
+    public void run(){
+        System.out.println("runinng");
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+        A obj;
+
+        obj=new B();
+        obj.show();
+        obj.config();
+        X obj1= new B();
+        obj1.run();
+
+        System.out.println(A.age);// always final
+    }
+}
