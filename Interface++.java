@@ -307,3 +307,228 @@ public class Main {
       //////
     }
 }
+interface Movable {
+    void moveForward();
+    void moveBackward();
+    void turnLeft();
+    void turnRight();
+}
+
+abstract class GameEntity {
+    public void render() {
+        System.out.println("Render:" + texture + " x:" + x + " y:" + y);
+    }
+
+    abstract void update();
+    private int x, y;
+    private String texture;
+
+    public void setX(int x) { 
+        this.x = x; 
+    }
+    public int getX() {
+     return x; 
+ }
+
+    public void setY(int y) { 
+        this.y = y; 
+    }
+    public int getY() { 
+        return y;
+     }
+
+    public void setTexture(String texture) { 
+        this.texture = texture; 
+    }
+    public String getTexture() { 
+        return texture; 
+    }
+}
+
+abstract class Enemy extends GameEntity {
+    public abstract void attack();
+}
+
+class Zombie extends Enemy {
+    public void attack() { 
+        System.out.println("zombie attacking"); 
+    }
+    public void update() { 
+        System.out.println("zombie moving "); 
+    }
+}
+
+class Alien extends Enemy {
+    public void attack() { 
+        System.out.println("Alien attacking");
+         }
+    public void update() { 
+        System.out.println("Alien moving");
+         }
+}
+
+class Robot extends Enemy {
+    public void attack() { 
+        System.out.println("Robot attacking"); 
+    }
+    public void update() { 
+        System.out.println("Robot moving");
+         }
+}
+
+class Item {
+    private String name;
+    public Item(String name) { 
+        this.name = name;
+         }
+    public void setName(String name) {
+     this.name = name; 
+ }
+    public String getName() { 
+        return name; 
+    }
+    public String toString() { 
+        return name; 
+    }
+}
+
+class Inventory {
+    private Item[] items;
+    private int itemCount;
+
+    public Inventory(int capacity) {
+        items = new Item[capacity];
+        itemCount = 0;
+    }
+
+    public void addItems(Item item) {
+        if (itemCount < items.length) {
+            items[itemCount] = item;
+            itemCount++;
+        } else {
+            System.out.println("Inventory is full");
+        }
+    }
+
+    public void showItems() {
+        for (int i = 0; i < itemCount; i++) {
+            System.out.println(" " + items[i].getName());
+        }
+    }
+
+    public void setItem(Item[] items) {
+        this.items = items;
+    }
+    public Item[] getItem() {
+        return items;
+    }
+
+    public void setItemCount(int itemCount) {
+        this.itemCount = itemCount;
+    }
+    public int getItemCount() {
+        return itemCount;
+    }
+}
+
+class Player extends GameEntity implements Movable {
+    private Inventory inventory; 
+    public Player() {
+        inventory = new Inventory(5);
+    }
+    public void moveForward() { setY(getY() + 1); }
+    public void moveBackward() { setY(getY() - 1); }
+    public void turnLeft() { setX(getX() - 1); }
+    public void turnRight() { setX(getX() + 1); }
+
+    public void update() {
+        System.out.println("Player updating...");
+    }
+    public void addItemToInventory(Item item) {
+        inventory.addItems(item);
+    }
+
+    public void showInventory() {
+        inventory.showItems();
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+}
+
+public class Start {
+    public static void main(String[] args) {
+
+        Player player = new Player();
+        player.setTexture("hero");
+        player.setX(10);
+        player.setY(5);
+        player.render();
+        player.addItemToInventory(new Item("Sword"));
+        player.addItemToInventory(new Item("Potion"));
+        player.addItemToInventory(new Item("Map"));
+        Enemy[] enemies = { new Zombie(), new Alien(), new Robot() };
+        for (int i = 0; i < enemies.length; i++) {
+            enemies[i].attack();
+            enemies[i].update();
+        }
+    }
+}
+interface Drivable {
+    void accelerate();
+    void brake();
+}
+
+class Car implements Drivable {
+    private final String model;
+    private int speed;
+
+    public Car(String model) {
+        this.model = model;
+        this.speed = 0;  // default speed
+    }
+
+    // Implementing accelerate method
+    public void accelerate() {
+        speed += 10;
+        System.out.println(model + " accelerated. Current speed: " + speed);
+    }
+
+    // Implementing brake method
+    public void brake() {
+        speed -= 10;
+        if (speed < 0) speed = 0; // prevent negative speed
+        System.out.println(model + " braked. Current speed: " + speed);
+    }
+
+    // Getter for model (final, so no setter)
+    public String getModel() {
+        return model;
+    }
+
+    // Getter and setter for speed
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        if (speed >= 0) {
+            this.speed = speed;
+        }
+    }
+}
+public class Start {
+    public static void main(String[] args) {
+        Car myCar = new Car("Toyota");
+        myCar.accelerate(); // Toyota accelerated. Current speed: 10
+        myCar.accelerate(); // Toyota accelerated. Current speed: 20
+        myCar.brake();      // Toyota braked. Current speed: 10
+        System.out.println("Final speed: " + myCar.getSpeed());
+        System.out.println("Model: " + myCar.getModel());
+    }
+}
