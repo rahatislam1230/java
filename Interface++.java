@@ -617,3 +617,49 @@ public class Start {
         con.turnOff();
         ((SmartDevice)con).deviceInfo();    }
 }
+interface Drivable{
+    void accelerate();
+    void brake();
+}
+class Car implements Drivable{
+    private final String model;
+    private int speed;
+    public Car(String model){
+        this.model=model;
+        this.speed=0;
+    }
+    public void accelerate(){
+        speed+=10;
+        System.out.println(model+"accelerate:"+speed);
+    }
+    public void brake(){
+        speed-=10;
+        if(speed<0){
+            speed=0;
+        }else{
+            System.out.println(model+"brake:"+speed);
+        }
+    }
+    public String getModel(){
+        return model;
+    }
+    public void setSpeed(int speed){
+        if(speed>=0){
+        this.speed=speed;
+    }
+    }
+    public int getSpeed(){
+        return speed;
+    }
+}
+
+public class Start {
+    public static void main(String[] args) {
+       Car mc=new Car("hola");
+       mc.accelerate();
+       mc.accelerate();
+       mc.brake();
+       System.out.println(mc.getSpeed());
+       System.out.println(mc.getModel());
+  }
+}
