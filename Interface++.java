@@ -532,3 +532,88 @@ public class Start {
         System.out.println("Model: " + myCar.getModel());
     }
 }
+interface Controllable {
+     void turnOn();
+   void turnOff();
+}
+
+interface Connectable extends Controllable {
+    void connectToNetwork();
+}
+
+abstract class SmartDevice {
+    private String deviceName;
+    final String brand = "TeachX";
+
+    public abstract void showStatus();
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
+
+    public String getDeviceName() {
+        return deviceName;
+    }
+
+    void deviceInfo() {
+        System.out.println("brand name:" + getDeviceName() + " brand:" + brand);
+    }
+}
+
+class Remote {
+    Remote() {
+        System.out.println("I am a remote");
+    }
+}
+
+class SmartTv extends SmartDevice implements Connectable {
+    Remote remote;
+    public void turnOn() {
+        System.out.println("SmartTv turn on");
+    }
+
+    public void turnOff() {
+        System.out.println("SmartTv turn off");
+    }
+
+    public void connectToNetwork() {
+        System.out.println("SmartTv has connectToNetwork");
+    }
+
+    public void showStatus() {
+        System.out.println("SmartTv status shown");
+    }
+
+    final void maxVolume() {
+        System.out.println("SmartTv Volume: 100");
+    }
+}
+class SmartSpeaker extends SmartDevice implements Connectable {
+    public void turnOn() {
+        System.out.println("SmartSpeaker turn on");
+    }
+    public void turnOff() {
+        System.out.println("SmartSpeaker turn off");
+    }
+    public void connectToNetwork() {
+        System.out.println("SmartSpeaker has connectToNetwork");
+    }
+    public void showStatus() {
+        System.out.println("SmartSpeaker status shown");
+    }
+}
+
+public class Start {
+    public static void main(String[] args) {
+        Connectable con = new SmartTv();
+        con.turnOn();
+        con.connectToNetwork();
+        ((SmartTv)con).maxVolume();
+        con.turnOff();
+        con = new SmartSpeaker();
+        con.turnOn();
+        con.turnOn();
+        con.connectToNetwork();
+        con.turnOff();
+        ((SmartDevice)con).deviceInfo();    }
+}
