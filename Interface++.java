@@ -663,3 +663,156 @@ public class Start {
        System.out.println(mc.getModel());
   }
 }
+import java.util.Scanner;
+abstract class Vehicle{
+    abstract void displayDetails();
+}
+interface Mileage{
+    void showMileage(double kmpl);
+}
+class Engine{
+    private String category;
+    private double capacity;
+    private double price;
+    public Engine(String category,double capacity,double price){
+        this.category=category;
+        this.capacity=capacity;
+        this.price=price;
+    }
+    public void setCategory(String category){
+        this.category=category;
+    }
+    public String getCategory(){
+        return  category;
+    }
+    public void setCapacity(double capacity){
+        this.capacity=capacity;
+    }
+    public double getCapacity(){
+        return capacity;
+    }
+    public void setPrice(double price){
+        this.price=price;
+    }
+    public double getPrice(){
+        return price;
+    }
+    public void showInfo(){
+        System.out.println(" "+category+" "+capacity+" "+price);
+    }
+
+}
+class Wheel{
+    private double size;
+    private String brand;
+    private double price;
+    Wheel(double size,String brand,double price){
+        this.size=size;
+        this.brand=brand;
+        this.price=price;
+    }
+    public void setBrand(String brand){
+        this.brand=brand;
+    }
+    public String getBrand(){
+        return brand;
+    }
+    public void setSize(double size){
+        this.size=size;
+    }
+    public double getSize(){
+        return size;
+    }
+    public void setPrice(double price){
+        this.price=price;
+    }
+    public double getPrice(){
+        return price;
+    }
+    public void showInfo(){
+        System.out.println(" "+brand+" "+size+" "+price);
+    }
+}
+class Car extends Vehicle implements Mileage{
+    private String model;
+    private String brand;
+    private double price;
+    private Engine engine;
+    private Wheel wheel;
+    final String company="BMW";
+    Car(String model,String brand,double price,Engine engine,Wheel wheel){
+        this.model=model;
+        this.brand=brand;
+        this.price=price;
+        this.engine=engine;
+        this.wheel=wheel;
+    }
+    public void setBrand(String brand){
+        this.brand=brand;
+    }
+    public String getBrand(){
+        return brand;
+    }
+    public void setModel(String model){
+        this.model=model;
+    }
+    public String getModel(){
+        return model;
+    }
+    public void setPrice(double price){
+        this.price=price;
+    }
+    public double getPrice(){
+        return price;
+    }
+    public void setEngine(Engine engine){
+        this.engine=engine;
+    }
+    public Engine getEngine(){
+        return engine;
+    }
+    public void setWheel(Wheel wheel){
+        this.wheel=wheel;
+    }
+    public Wheel getWheel(){
+        return wheel;
+    }
+    final void showCompany(){
+        System.out.println("company"+company);
+    }
+    void displayDetails(){
+        showCompany();
+        System.out.println(" "+model+" "+brand+" "+price+" ");
+        engine.showInfo();
+        wheel.showInfo();
+    }
+    public void showMileage(double kmpl){
+        System.out.println(kmpl);
+    }
+}
+
+public class Start {
+    public static void main(String[] args) {
+      Scanner sc=new Scanner(System.in);
+      String category=sc.nextLine();
+      sc.nextLine();
+      double capacity=sc.nextDouble();
+      double price=sc.nextDouble();
+      Engine e =new Engine(category,capacity,price);
+      double size=sc.nextDouble();
+      sc.nextLine();
+      String brand=sc.nextLine();
+      sc.nextLine();
+      double kmpl=sc.nextDouble();
+      double price1=sc.nextDouble();
+      Wheel w=new Wheel(size,brand,price1);
+      String model=sc.nextLine();
+      String brand1=sc.nextLine();
+      sc.nextLine();
+      double price2=sc.nextDouble();
+      Vehicle v=new Car(model,brand1,price2,e,w);
+      v.displayDetails();
+      ((Car)v).showMileage(kmpl);
+
+  }
+}
