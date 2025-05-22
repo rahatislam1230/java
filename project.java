@@ -55,20 +55,80 @@ class PanelView {
     submit.setBounds(135,160,160,30);
     jp.add(submit);
     jf.add(jp);
-    submit.addActionListener(new SubmitAction(idField,nameField,gradeField,CreditField));
+    submit.addActionListener(new SubmitAction(idField,nameField,gradeField,CreditField,jf));
     }
 }
 class SubmitAction implements ActionListener{
     JTextField idField,nameField,gradeField,CreditField;
-   SubmitAction(JTextField idField,JTextField nameField,JTextField gradeField,JTextField CreditField){
+    JFrame jf;
+   SubmitAction(JTextField idField,JTextField nameField,JTextField gradeField,JTextField CreditField,JFrame jf){
        this.idField= idField;
        this.nameField=nameField;
        this.gradeField=gradeField;
        this.CreditField=CreditField;
+       this.jf=jf;
     }public void actionPerformed(ActionEvent ae){
         System.out.println("id button Clicked"+idField.getText());
         System.out.println("name button Clicked"+nameField.getText());
         System.out.println("grade button Clicked"+gradeField.getText());
         System.out.println("credit button Clicked"+CreditField.getText());
+        File f=new File("super.txt");
+        FileWriter fw = null;
+        try {
+            fw=new FileWriter(f,true);
+            fw.write(idField.getText() + "," + nameField.getText()+ "," + gradeField.getText() +  "," + CreditField.getText()+"\n");
+             Cgpa cg = new Cgpa();
+            jf.setVisible(false);
+            cg.jf.setVisible(true);
+        }catch(IOException ioe) {
+            System.out.println("Error while creating a new file");
+        } finally {
+            try {
+                fw.close();
+            } catch(Exception ex) {
+                System.out.println("Error while closing the file");
+            }
+        }
    }
+}
+class Cgpa{
+    JFrame jf;
+    JPanel jp;
+    JTextArea area;
+    JButton backBtn;
+    Cgpa(){
+        jf = new JFrame("List of Student Information");
+        jf.setSize(800, 500);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        jp = new JPanel();
+        jp.setLayout(null);
+
+        File f = new File("super.txt");
+
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            fr = new FileReader(f);
+            br = new BufferedReader(fr);
+
+            String line;
+            String data = "";
+            while((line = br.readLine()) != null) {
+                data += line + "\n";
+            }
+
+            area = new JTextArea(data);
+            area.setBounds(50, 50, 700, 400);
+
+            jp.add(area);
+
+        } catch(IOException ioe) {
+            System.out.println("Error while reading the file");
+        }
+        backBtn =new JButton("back");
+        backBtn.setBounds(50,410,100,30);
+        jp.add(backBtn);
+        jf.add(jp);
+    }
 }
