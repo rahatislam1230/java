@@ -816,3 +816,906 @@ public class Start {
 
   }
 }
+import javax.swing.*;
+import java.awt.event.*;
+class BankAccount{
+	private String accountno;
+	private double balance;
+	BankAccount(String accountno,double balance){
+		this.accountno=accountno;
+		this.balance=balance;
+	}
+	public String toString(){
+		return "accountno"+accountno+"balance"+balance;
+	}
+	public void addBonus(){
+
+	}
+
+}
+class SalaryAccount extends BankAccount{
+	public SalaryAccount(String accountno,double balance){
+		super(accountno,balance);
+	}
+	public String toString(){
+		return super.toString()+"SalaryAccount";
+	}
+}
+class BonousAccount extends BankAccount{
+	private double bonusPrcentage;
+	BonousAccount(String accountno,double balance,double bonusPrcentage){
+		super(accountno,balance);
+		this.bonusPrcentage=bonusPrcentage;
+	}
+	public void addBonus(){
+		balance+=balance*(bonusPrcentage/100.0);
+	}
+	String toString(){
+		return super.toString()+"BonousAccount"+bonusPrcentage;
+	}
+}
+class Employee{
+	private int id;
+	private String name;
+	private String salaryAccount;
+	Employee(int id,String name,String salaryAccount){
+		this.id=id;
+		this.name=name;
+		this.salaryAccount=salaryAccount;
+	}
+	void getID(int id){
+		this.id=id;
+	}
+	int setID(){
+		return id;
+	}
+	void getName(String name){
+		this.name=name;
+	}
+	String setName(){
+		return name;
+	}
+	void getSalaryAccount(String salaryAccount){
+		this.salaryAccount=salaryAccount;
+	}
+	String setSalaryAccount(){
+		return salaryAccount;
+	}
+	String toString(){
+		return "Employee id"+id+"name"+name+"salaryAccount"+salaryAccount;
+	}
+}
+
+class Main{
+	public static void main(String[]args){
+		  JFrame frame = new JFrame("Employee Account Info");
+        frame.setSize(450, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JTextArea outputArea = new JTextArea();
+        outputArea.setEditable(false);
+        JButton showSalaryBtn = new JButton("Show Salary Account");
+        JButton showBonusBtn = new JButton("Show Bonus Account");
+        JButton applyBonusBtn = new JButton("Apply Bonus");
+        SalaryAccount salaryAcc = new SalaryAccount("SAL123", 30000);
+        BonusAccount bonusAcc = new BonusAccount("BON456", 40000, 10);
+        Employee emp1 = new Employee(101, "Alice", salaryAcc);
+        Employee emp2 = new Employee(102, "Bob", bonusAcc);
+        final Employee[] current = {null};  
+        showSalaryBtn.addActionListener(e -> {
+            current[0] = emp1;
+            outputArea.setText(emp1.toString());
+        });
+
+        showBonusBtn.addActionListener(e -> {
+            current[0] = emp2;
+            outputArea.setText(emp2.toString());
+        });
+
+        applyBonusBtn.addActionListener(e -> {
+            if (current[0] != null) {
+                current[0].applyBonusIfAny();
+                outputArea.setText(current[0].toString());
+            } else {
+                outputArea.setText("Please select an employee first.");
+            }
+        });
+
+        JPanel panel = new JPanel(new GridLayout(4, 1));
+        panel.add(showSalaryBtn);
+        panel.add(showBonusBtn);
+        panel.add(applyBonusBtn);
+        panel.add(new JScrollPane(outputArea));
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.io.*;
+
+public class EmployeeBonusWithFile {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Employee Bonus System");
+        frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JTextArea outputArea = new JTextArea();
+        outputArea.setEditable(false);
+
+        JButton addEmpBtn = new JButton("Add Bonus Employee");
+        JButton applyBonusBtn = new JButton("Apply Bonus");
+        JButton saveBtn = new JButton("Save to File");
+        JButton loadBtn = new JButton("Load from File");
+
+        ArrayList<Employee> employeeList = new ArrayList<>();
+        final Employee[] current = {null};
+
+        // Add Bonus Employee (Input using JOptionPane)
+        addEmpBtn.addActionListener(e -> {
+            try {
+                String idStr = JOptionPane.showInputDialog("Enter Employee ID:");
+                String name = JOptionPane.showInputDialog("Enter Name:");
+                String accNo = JOptionPane.showInputDialog("Enter Account No:");
+                String balanceStr = JOptionPane.showInputDialog("Enter Balance:");
+                String bonusStr = JOptionPane.showInputDialog("Enter Bonus Percentage:");
+
+                int id = Integer.parseInt(idStr);
+                double balance = Double.parseDouble(balanceStr);
+                double bonus = Double.parseDouble(bonusStr);
+
+                BonusAccount ba = new BonusAccount(accNo, balance, bonus);
+                Employee emp = new Employee(id, name, ba);
+                employeeList.add(emp);
+                current[0] = emp;
+
+                outputArea.setText("Added Employee:\n" + emp.toString());
+            } catch (Exception ex) {
+                outputArea.setText("Invalid input! Try again.");
+            }
+        });
+
+        // Apply bonus
+        applyBonusBtn.addActionListener(e -> {
+            if (current[0] != null) {
+                current[0].applyBonusIfAny();
+                outputArea.setText("Bonus Applied:\n" + current[0].toString());
+            } else {
+                outputArea.setText("No employee selected.");
+            }
+        });
+
+        // Save to file
+        saveBtn.addActionListener(e -> {
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("employee.txt"));
+                for (Employee emp : employeeList) {
+                    writer.write(emp.toString());
+                    writer.newLine();
+                    writer.write("----");
+                    writer.newLine();
+                }
+                writer.close();
+                outputArea.setText("Saved to employee.txt");
+            } catch (IOException ex) {
+                outputArea.setText("Error writing to file.");
+            }
+        });
+
+        // Load from file
+        loadBtn.addActionListener(e -> {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
+                String line;
+                StringBuilder sb = new StringBuilder();
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line).append("\n");
+                }
+                reader.close();
+                outputArea.setText("Loaded Data:\n" + sb.toString());
+            } catch (IOException ex) {
+                outputArea.setText("Error reading from file.");
+            }
+        });
+
+        JPanel panel = new JPanel(new GridLayout(5, 1));
+        panel.add(addEmpBtn);
+        panel.add(applyBonusBtn);
+        panel.add(saveBtn);
+        panel.add(loadBtn);
+        panel.add(new JScrollPane(outputArea));
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.io.*;
+
+class BankAccount {
+    protected String accountNo;
+    protected double balance;
+
+    public BankAccount(String accountNo, double balance) {
+        this.accountNo = accountNo;
+        this.balance = balance;
+    }
+
+    public void addBonus() {
+        // Default: no bonus
+    }
+
+    public String toString() {
+        return "Account No: " + accountNo + "\nBalance: " + balance;
+    }
+}
+
+class BonusAccount extends BankAccount {
+    private double bonusPercentage;
+
+    public BonusAccount(String accountNo, double balance, double bonusPercentage) {
+        super(accountNo, balance);
+        this.bonusPercentage = bonusPercentage;
+    }
+
+    @Override
+    public void addBonus() {
+        balance += balance * (bonusPercentage / 100.0);
+    }
+
+    public String toString() {
+        return super.toString() + "\nType: BonusAccount\nBonus Rate: " + bonusPercentage + "%";
+    }
+}
+
+class Employee {
+    private int id;
+    private String name;
+    private BankAccount salaryAccount;
+
+    public Employee(int id, String name, BankAccount salaryAccount) {
+        this.id = id;
+        this.name = name;
+        this.salaryAccount = salaryAccount;
+    }
+
+    public void applyBonusIfAny() {
+        salaryAccount.addBonus();
+    }
+
+    public String toString() {
+        return "Employee ID: " + id + "\nName: " + name + "\n" + salaryAccount.toString();
+    }
+}
+
+public class EmployeeBonusGUI {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Employee Bonus System");
+        frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JTextArea outputArea = new JTextArea();
+        outputArea.setEditable(false);
+
+        JButton addEmpBtn = new JButton("Add Bonus Employee");
+        JButton applyBonusBtn = new JButton("Apply Bonus");
+        JButton saveBtn = new JButton("Save to File");
+        JButton loadBtn = new JButton("Load from File");
+
+        ArrayList<Employee> employeeList = new ArrayList<>();
+        final Employee[] current = {null};
+
+        // Add employee
+        addEmpBtn.addActionListener(e -> {
+            try {
+                String idStr = JOptionPane.showInputDialog("Enter Employee ID:");
+                String name = JOptionPane.showInputDialog("Enter Name:");
+                String accNo = JOptionPane.showInputDialog("Enter Account No:");
+                String balStr = JOptionPane.showInputDialog("Enter Balance:");
+                String bonusStr = JOptionPane.showInputDialog("Enter Bonus %:");
+
+                int id = Integer.parseInt(idStr);
+                double balance = Double.parseDouble(balStr);
+                double bonus = Double.parseDouble(bonusStr);
+
+                BonusAccount acc = new BonusAccount(accNo, balance, bonus);
+                Employee emp = new Employee(id, name, acc);
+                employeeList.add(emp);
+                current[0] = emp;
+
+                outputArea.setText("Employee added:\n\n" + emp.toString());
+            } catch (Exception ex) {
+                outputArea.setText("Invalid input. Please try again.");
+            }
+        });
+
+        // Apply bonus
+        applyBonusBtn.addActionListener(e -> {
+            if (current[0] != null) {
+                current[0].applyBonusIfAny();
+                outputArea.setText("Bonus Applied:\n\n" + current[0].toString());
+            } else {
+                outputArea.setText("No employee selected.");
+            }
+        });
+
+        // Save to file
+        saveBtn.addActionListener(e -> {
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("employee.txt"));
+                for (Employee emp : employeeList) {
+                    writer.write(emp.toString());
+                    writer.newLine();
+                    writer.write("----");
+                    writer.newLine();
+                }
+                writer.close();
+                outputArea.setText("Employee data saved to employee.txt");
+            } catch (IOException ex) {
+                outputArea.setText("Error writing to file.");
+            }
+        });
+
+        // Load from file
+        loadBtn.addActionListener(e -> {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
+                String line;
+                StringBuilder sb = new StringBuilder();
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line).append("\n");
+                }
+                reader.close();
+                outputArea.setText("Loaded from file:\n\n" + sb.toString());
+            } catch (IOException ex) {
+                outputArea.setText("Error reading file.");
+            }
+        });
+
+        JPanel panel = new JPanel(new GridLayout(5, 1));
+        panel.add(addEmpBtn);
+        panel.add(applyBonusBtn);
+        panel.add(saveBtn);
+        panel.add(loadBtn);
+        panel.add(new JScrollPane(outputArea));
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
+class PriceAccount {
+    protected String accountNo;
+    protected double price;
+
+    public PriceAccount(String accountNo, double price) {
+        this.accountNo = accountNo;
+        this.price = price;
+    }
+
+    public void adjustPrice() {
+        // No adjustment in base class
+    }
+
+    public String toString() {
+        return "Account No: " + accountNo + "\nPrice: " + price;
+    }
+}
+
+class DiscountAccount extends PriceAccount {
+    private double discountPercent;
+
+    public DiscountAccount(String accountNo, double price, double discountPercent) {
+        super(accountNo, price);
+        this.discountPercent = discountPercent;
+    }
+
+    @Override
+    public void adjustPrice() {
+        price -= price * (discountPercent / 100.0);
+    }
+
+    public String toString() {
+        return super.toString() + "\nType: DiscountAccount\nDiscount: " + discountPercent + "%";
+    }
+}
+
+class PremiumAccount extends PriceAccount {
+    private double premiumPercent;
+
+    public PremiumAccount(String accountNo, double price, double premiumPercent) {
+        super(accountNo, price);
+        this.premiumPercent = premiumPercent;
+    }
+
+    @Override
+    public void adjustPrice() {
+        price += price * (premiumPercent / 100.0);
+    }
+
+    public String toString() {
+        return super.toString() + "\nType: PremiumAccount\nPremium: " + premiumPercent + "%";
+    }
+}
+
+class Product {
+    private int id;
+    private String name;
+    private PriceAccount priceAccount;
+
+    public Product(int id, String name, PriceAccount priceAccount) {
+        this.id = id;
+        this.name = name;
+        this.priceAccount = priceAccount;
+    }
+
+    public void adjustPriceIfAny() {
+        priceAccount.adjustPrice();
+    }
+
+    public String toString() {
+        return "Product ID: " + id + "\nName: " + name + "\n" + priceAccount.toString();
+    }
+}
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+
+public class ProductStoreGUI {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Product Store");
+        frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JTextArea outputArea = new JTextArea();
+        outputArea.setEditable(false);
+
+        JButton addDiscountBtn = new JButton("Add Discount Product");
+        JButton addPremiumBtn = new JButton("Add Premium Product");
+        JButton applyAdjustmentBtn = new JButton("Adjust Price");
+        JButton saveBtn = new JButton("Save to File");
+        JButton loadBtn = new JButton("Load from File");
+
+        ArrayList<Product> productList = new ArrayList<>();
+        final Product[] current = {null};
+
+        addDiscountBtn.addActionListener(e -> {
+            try {
+                String idStr = JOptionPane.showInputDialog("Enter Product ID:");
+                String name = JOptionPane.showInputDialog("Enter Product Name:");
+                String accNo = JOptionPane.showInputDialog("Enter Account No:");
+                String priceStr = JOptionPane.showInputDialog("Enter Price:");
+                String discountStr = JOptionPane.showInputDialog("Enter Discount %:");
+
+                int id = Integer.parseInt(idStr);
+                double price = Double.parseDouble(priceStr);
+                double discount = Double.parseDouble(discountStr);
+
+                DiscountAccount da = new DiscountAccount(accNo, price, discount);
+                Product product = new Product(id, name, da);
+                productList.add(product);
+                current[0] = product;
+
+                outputArea.setText("Product added:\n\n" + product.toString());
+            } catch (Exception ex) {
+                outputArea.setText("Invalid input.");
+            }
+        });
+
+        addPremiumBtn.addActionListener(e -> {
+            try {
+                String idStr = JOptionPane.showInputDialog("Enter Product ID:");
+                String name = JOptionPane.showInputDialog("Enter Product Name:");
+                String accNo = JOptionPane.showInputDialog("Enter Account No:");
+                String priceStr = JOptionPane.showInputDialog("Enter Price:");
+                String premiumStr = JOptionPane.showInputDialog("Enter Premium %:");
+
+                int id = Integer.parseInt(idStr);
+                double price = Double.parseDouble(priceStr);
+                double premium = Double.parseDouble(premiumStr);
+
+                PremiumAccount pa = new PremiumAccount(accNo, price, premium);
+                Product product = new Product(id, name, pa);
+                productList.add(product);
+                current[0] = product;
+
+                outputArea.setText("Product added:\n\n" + product.toString());
+            } catch (Exception ex) {
+                outputArea.setText("Invalid input.");
+            }
+        });
+
+        applyAdjustmentBtn.addActionListener(e -> {
+            if (current[0] != null) {
+                current[0].adjustPriceIfAny();
+                outputArea.setText("Price Adjusted:\n\n" + current[0].toString());
+            } else {
+                outputArea.setText("No product selected.");
+            }
+        });
+
+        saveBtn.addActionListener(e -> {
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("product.txt"));
+                for (Product p : productList) {
+                    writer.write(p.toString());
+                    writer.newLine();
+                    writer.write("----");
+                    writer.newLine();
+                }
+                writer.close();
+                outputArea.setText("Saved to product.txt");
+            } catch (IOException ex) {
+                outputArea.setText("Error saving file.");
+            }
+        });
+
+        loadBtn.addActionListener(e -> {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader("product.txt"));
+                String line;
+                StringBuilder sb = new StringBuilder();
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line).append("\n");
+                }
+                reader.close();
+                outputArea.setText("Loaded Data:\n\n" + sb.toString());
+            } catch (IOException ex) {
+                outputArea.setText("Error loading file.");
+            }
+        });
+
+        JPanel panel = new JPanel(new GridLayout(6, 1));
+        panel.add(addDiscountBtn);
+        panel.add(addPremiumBtn);
+        panel.add(applyAdjustmentBtn);
+        panel.add(saveBtn);
+        panel.add(loadBtn);
+        panel.add(new JScrollPane(outputArea));
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
+class BankAccount {
+    protected String accountNo;
+    protected double balance;
+
+    public BankAccount(String accountNo, double balance) {
+        this.accountNo = accountNo;
+        this.balance = balance;
+    }
+
+    public void applyScholarship() {}
+
+    public String toString() {
+        return "Account No: " + accountNo + "\nBalance: " + balance;
+    }
+}
+
+class MeritScholarshipAccount extends BankAccount {
+    private double meritBonus;
+
+    public MeritScholarshipAccount(String accountNo, double balance, double meritBonus) {
+        super(accountNo, balance);
+        this.meritBonus = meritBonus;
+    }
+
+    @Override
+    public void applyScholarship() {
+        balance += meritBonus;
+    }
+
+    public String toString() {
+        return super.toString() + "\nType: MeritScholarship\nBonus: " + meritBonus;
+    }
+}
+
+class NeedBasedScholarshipAccount extends BankAccount {
+    private double percent;
+
+    public NeedBasedScholarshipAccount(String accountNo, double balance, double percent) {
+        super(accountNo, balance);
+        this.percent = percent;
+    }
+
+    @Override
+    public void applyScholarship() {
+        balance += balance * (percent / 100.0);
+    }
+
+    public String toString() {
+        return super.toString() + "\nType: NeedBasedScholarship\nRate: " + percent + "%";
+    }
+}
+
+class Student {
+    private int id;
+    private String name;
+    private BankAccount scholarshipAccount;
+
+    public Student(int id, String name, BankAccount scholarshipAccount) {
+        this.id = id;
+        this.name = name;
+        this.scholarshipAccount = scholarshipAccount;
+    }
+
+    public void applyScholarship() {
+        scholarshipAccount.applyScholarship();
+    }
+
+    public String toString() {
+        return "Student ID: " + id + "\nName: " + name + "\n" + scholarshipAccount.toString();
+    }
+}
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+
+public class StudentScholarshipGUI {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Scholarship System");
+        frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JTextArea outputArea = new JTextArea();
+        outputArea.setEditable(false);
+
+        JButton addMeritBtn = new JButton("Add Merit Student");
+        JButton addNeedBtn = new JButton("Add Need-based Student");
+        JButton applyBtn = new JButton("Apply Scholarship");
+        JButton saveBtn = new JButton("Save");
+        JButton loadBtn = new JButton("Load");
+
+        ArrayList<Student> studentList = new ArrayList<>();
+        final Student[] current = {null};
+
+        addMeritBtn.addActionListener(e -> {
+            try {
+                int id = Integer.parseInt(JOptionPane.showInputDialog("Enter Student ID:"));
+                String name = JOptionPane.showInputDialog("Enter Name:");
+                String acc = JOptionPane.showInputDialog("Enter Account No:");
+                double bal = Double.parseDouble(JOptionPane.showInputDialog("Enter Balance:"));
+                double bonus = Double.parseDouble(JOptionPane.showInputDialog("Enter Merit Bonus:"));
+
+                MeritScholarshipAccount m = new MeritScholarshipAccount(acc, bal, bonus);
+                Student s = new Student(id, name, m);
+                studentList.add(s);
+                current[0] = s;
+
+                outputArea.setText("Student Added:\n\n" + s);
+            } catch (Exception ex) {
+                outputArea.setText("Error in input.");
+            }
+        });
+
+        addNeedBtn.addActionListener(e -> {
+            try {
+                int id = Integer.parseInt(JOptionPane.showInputDialog("Enter Student ID:"));
+                String name = JOptionPane.showInputDialog("Enter Name:");
+                String acc = JOptionPane.showInputDialog("Enter Account No:");
+                double bal = Double.parseDouble(JOptionPane.showInputDialog("Enter Balance:"));
+                double percent = Double.parseDouble(JOptionPane.showInputDialog("Enter Need-based %:"));
+
+                NeedBasedScholarshipAccount n = new NeedBasedScholarshipAccount(acc, bal, percent);
+                Student s = new Student(id, name, n);
+                studentList.add(s);
+                current[0] = s;
+
+                outputArea.setText("Student Added:\n\n" + s);
+            } catch (Exception ex) {
+                outputArea.setText("Error in input.");
+            }
+        });
+
+        applyBtn.addActionListener(e -> {
+            if (current[0] != null) {
+                current[0].applyScholarship();
+                outputArea.setText("Scholarship Applied:\n\n" + current[0]);
+            } else {
+                outputArea.setText("No student selected.");
+            }
+        });
+
+        saveBtn.addActionListener(e -> {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt"))) {
+                for (Student s : studentList) {
+                    writer.write(s.toString());
+                    writer.newLine();
+                    writer.write("-----");
+                    writer.newLine();
+                }
+                outputArea.setText("Saved to students.txt");
+            } catch (IOException ex) {
+                outputArea.setText("Error writing to file.");
+            }
+        });
+
+        loadBtn.addActionListener(e -> {
+            try (BufferedReader reader = new BufferedReader(new FileReader("students.txt"))) {
+                String line;
+                StringBuilder sb = new StringBuilder();
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line).append("\n");
+                }
+                outputArea.setText("Loaded Data:\n\n" + sb);
+            } catch (IOException ex) {
+                outputArea.setText("Error reading file.");
+            }
+        });
+
+        JPanel panel = new JPanel(new GridLayout(6, 1));
+        panel.add(addMeritBtn);
+        panel.add(addNeedBtn);
+        panel.add(applyBtn);
+        panel.add(saveBtn);
+        panel.add(loadBtn);
+        panel.add(new JScrollPane(outputArea));
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
+class FuelAccount {
+    protected String accountNo;
+    protected double fuelAmount; // litres or kWh
+    protected double unitPrice;
+
+    public FuelAccount(String accountNo, double fuelAmount, double unitPrice) {
+        this.accountNo = accountNo;
+        this.fuelAmount = fuelAmount;
+        this.unitPrice = unitPrice;
+    }
+
+    public double calculateFuelCost() {
+        return fuelAmount * unitPrice;
+    }
+
+    public String toString() {
+        return "Account No: " + accountNo +
+               "\nFuel Amount: " + fuelAmount +
+               "\nUnit Price: " + unitPrice +
+               "\nTotal Cost: " + calculateFuelCost();
+    }
+}
+
+class ElectricVehicleAccount extends FuelAccount {
+    public ElectricVehicleAccount(String accountNo, double kWh, double pricePerKWh) {
+        super(accountNo, kWh, pricePerKWh);
+    }
+
+    public String toString() {
+        return "Electric Vehicle Account\n" + super.toString();
+    }
+}
+
+class GasVehicleAccount extends FuelAccount {
+    public GasVehicleAccount(String accountNo, double litres, double pricePerLitre) {
+        super(accountNo, litres, pricePerLitre);
+    }
+
+    public String toString() {
+        return "Gas Vehicle Account\n" + super.toString();
+    }
+}
+
+class Vehicle {
+    private String number;
+    private FuelAccount fuelAccount;
+
+    public Vehicle(String number, FuelAccount fuelAccount) {
+        this.number = number;
+        this.fuelAccount = fuelAccount;
+    }
+
+    public String toString() {
+        return "Vehicle No: " + number + "\n" + fuelAccount.toString();
+    }
+}
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+
+public class VehicleFuelGUI {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Vehicle Fuel Cost System");
+        frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JTextArea outputArea = new JTextArea();
+        outputArea.setEditable(false);
+
+        JButton addElectricBtn = new JButton("Add Electric Vehicle");
+        JButton addGasBtn = new JButton("Add Gas Vehicle");
+        JButton saveBtn = new JButton("Save to File");
+        JButton loadBtn = new JButton("Load from File");
+
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        final Vehicle[] currentVehicle = {null};
+
+        addElectricBtn.addActionListener(e -> {
+            try {
+                String number = JOptionPane.showInputDialog("Enter Vehicle No:");
+                String acc = JOptionPane.showInputDialog("Enter Account No:");
+                double unit = Double.parseDouble(JOptionPane.showInputDialog("Enter kWh used:"));
+                double price = Double.parseDouble(JOptionPane.showInputDialog("Enter cost per kWh:"));
+
+                ElectricVehicleAccount ev = new ElectricVehicleAccount(acc, unit, price);
+                Vehicle v = new Vehicle(number, ev);
+                vehicles.add(v);
+                currentVehicle[0] = v;
+
+                outputArea.setText("Electric Vehicle Added:\n\n" + v);
+            } catch (Exception ex) {
+                outputArea.setText("Invalid input.");
+            }
+        });
+
+        addGasBtn.addActionListener(e -> {
+            try {
+                String number = JOptionPane.showInputDialog("Enter Vehicle No:");
+                String acc = JOptionPane.showInputDialog("Enter Account No:");
+                double unit = Double.parseDouble(JOptionPane.showInputDialog("Enter litres used:"));
+                double price = Double.parseDouble(JOptionPane.showInputDialog("Enter cost per litre:"));
+
+                GasVehicleAccount gv = new GasVehicleAccount(acc, unit, price);
+                Vehicle v = new Vehicle(number, gv);
+                vehicles.add(v);
+                currentVehicle[0] = v;
+
+                outputArea.setText("Gas Vehicle Added:\n\n" + v);
+            } catch (Exception ex) {
+                outputArea.setText("Invalid input.");
+            }
+        });
+
+        saveBtn.addActionListener(e -> {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("vehicles.txt"))) {
+                for (Vehicle v : vehicles) {
+                    writer.write(v.toString());
+                    writer.newLine();
+                    writer.write("-----");
+                    writer.newLine();
+                }
+                outputArea.setText("Saved to vehicles.txt");
+            } catch (IOException ex) {
+                outputArea.setText("Error writing file.");
+            }
+        });
+
+        loadBtn.addActionListener(e -> {
+            try (BufferedReader reader = new BufferedReader(new FileReader("vehicles.txt"))) {
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line).append("\n");
+                }
+                outputArea.setText("Loaded Data:\n\n" + sb.toString());
+            } catch (IOException ex) {
+                outputArea.setText("Error reading file.");
+            }
+        });
+
+        JPanel panel = new JPanel(new GridLayout(5, 1));
+        panel.add(addElectricBtn);
+        panel.add(addGasBtn);
+        panel.add(saveBtn);
+        panel.add(loadBtn);
+        panel.add(new JScrollPane(outputArea));
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
+
+	
